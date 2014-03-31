@@ -1,6 +1,6 @@
 package com.activity.clotheme;
 
-import com.resource.clotheme.R;
+import com.example.clotheme.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;

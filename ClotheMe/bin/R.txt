@@ -333,6 +333,7 @@ int string abc_shareactionprovider_share_with 0x7f0a000c
 int string abc_shareactionprovider_share_with_application 0x7f0a000b
 int string action_settings 0x7f0a0011
 int string app_name 0x7f0a000d
+int string databasepath 0x7f0a0012
 int string title_section1 0x7f0a000e
 int string title_section2 0x7f0a000f
 int string title_section3 0x7f0a0010
