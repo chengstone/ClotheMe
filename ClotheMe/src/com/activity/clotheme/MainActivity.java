@@ -1,6 +1,7 @@
 package com.activity.clotheme;
 
 import com.example.clotheme.R;
+import com.logicalModelLayer.clotheme.CategoryArchiveInfo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -48,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
                                 getString(R.string.title_section3),
                         }),
                 this);
+        CategoryArchiveInfo.getInstance(this);
     }
 
     @Override
