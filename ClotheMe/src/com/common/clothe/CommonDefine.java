@@ -5,6 +5,8 @@ public class CommonDefine {
         public static final int NO_ERROR = 0;
         public static final int SYSTEM_ERROR = -1;
         public static final int WARNING_ERROR = -2;
+        public static final boolean isUseLogback = false;
+        public static final boolean isDebug = true;
 
         public static final class CommonString {
             public static final String DATABASEPATH = "/data/data/%s/database";

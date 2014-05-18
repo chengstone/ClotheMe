@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import android.os.Bundle;
+import android.app.Activity;
+
+public class MainActivity extends Activity {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    // SLF4J
+    Logger log = LoggerFactory.getLogger(MainActivity.class);
+    log.info("hello world");
+  }
+} -->
+<configuration>
+<!-- <configuration> -->
+  <includes>
+    <!-- <include file="/sdcard/logback/logback.xml"/> -->
+    <include resource="AndroidManifest.xml"/>
+    <include resource="assets/logback.xml"/>
+  </includes>
+<!-- </configuration> -->
+  <property name="LOG_DIR" value="/data/data/com.ClotheMe/files" />
+
+  <!-- Create a logcat appender -->
+  <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+    <encoder>
+      <pattern>%msg</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- Create a file appender for TRACE-level messages -->
+  <appender name="TraceLog" class="ch.qos.logback.core.FileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>TRACE</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+
+    <file>${LOG_DIR}/trace.log</file>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Create a file appender for DEBUG-level messages -->
+  <appender name="DebugLog" class="ch.qos.logback.core.FileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+
+    <file>${LOG_DIR}/debug.log</file>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- Create a file appender for WARN-level messages -->
+  <appender name="WarnLog" class="ch.qos.logback.core.FileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+
+    <file>${LOG_DIR}/warn.log</file>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- Create a file appender for ERROR-level messages -->
+  <appender name="ErrorLog" class="ch.qos.logback.core.FileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+
+    <file>${LOG_DIR}/error.log</file>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Write TRACE messages from class A to its own log -->
+  <!-- <logger name="com.example.A" level="TRACE">
+    <appender-ref ref="TraceLog" />
+  </logger> -->
+
+  <!-- Write DEBUG messages from class B to its own log -->
+  <!-- <logger name="com.example.B" level="DEBUG">
+    <appender-ref ref="DebugLog" />
+  </logger>  -->
+
+  <!-- db file must exist already! -->
+  <!-- <property name="DB_FILE" value="/data/data/com.example/files/logback.db"/>
+
+  <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+    <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+      <driverClass>org.sqlite.JDBC</driverClass>
+      <url>jdbc:sqlite:${DB_FILE}</url>
+    </connectionSource>
+  </appender>
+
+  <root level="DEBUG" >
+    <appender-ref ref="DB" />
+  </root> -->
+
+  <!-- Write INFO (and higher-level) messages to logcat -->
+  <root level="INFO">
+    <appender-ref ref="logcat" />
+  </root>
+  
+  <root level="debug">
+    <appender-ref ref="DebugLog" />
+    <appender-ref ref="STDOUT" />
+  </root>
+  
+  <!-- 
+level of
+request p 	effective level q
+			TRACE 	DEBUG 	INFO 	WARN 	ERROR		OFF
+TRACE 		YES 	NO 		NO 		NO 		NO 			NO
+DEBUG 		YES 	YES 	NO 		NO 		NO 			NO
+INFO 		YES 	YES 	YES 	NO 		NO 			NO
+WARN 		YES 	YES 	YES 	YES 	NO 			NO
+ERROR 		YES 	YES 	YES 	YES 	YES 		NO -->
+  
+</configuration>
