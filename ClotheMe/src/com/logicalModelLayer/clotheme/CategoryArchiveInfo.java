@@ -107,8 +107,17 @@ public class CategoryArchiveInfo {
     	}
     	if(m_CategoryArchiveData.containsKey(in_meterialID) == true){
     		out_CategoryArchiveStruct = m_CategoryArchiveData.get(in_meterialID);
+    		if(out_CategoryArchiveStruct == null){
+    			if(CommonDefine.isDebug){
+            		Log.v("get failed");
+        		}
+        		return CommonDefine.SYSTEM_ERROR;
+    		}
     	}
     	else {
+    		if(CommonDefine.isDebug){
+        		Log.v("m_CategoryArchiveData does not contains key " + String.valueOf(in_meterialID));
+    		}
     		return CommonDefine.SYSTEM_ERROR;
     	}
     	return CommonDefine.NO_ERROR;
