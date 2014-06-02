@@ -16,12 +16,15 @@
 
 package com.common.clothe;
 
+import org.slf4j.Logger;
+
 /**
  * Wrapper API for sending log output.
  */
 public class Log {
 
     protected static final String TAG = "ClotheMe";
+    private static Logger logback = null;
 
     public Log() {
     }
@@ -31,7 +34,15 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void v(String msg) {
-        android.util.Log.v(TAG, buildMessage(msg));
+    	if(CommonDefine.isUseLogback){
+    		if(logback == null){
+    			logback = LogbackTool.getInstance(TAG);
+    		}
+    		logback.info(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.v(TAG, buildMessage(msg));
+    	}
     }
 
     /**

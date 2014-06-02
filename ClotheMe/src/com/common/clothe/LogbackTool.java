@@ -12,7 +12,7 @@ public class LogbackTool {
 	
 	public static Logger getInstance(String in_className){
 		if(logback == null){
-			logback = LoggerFactory.getLogger(in_className);	
+			logback = LoggerFactory.getLogger(in_className);
 		}
 		return logback;
 	}
