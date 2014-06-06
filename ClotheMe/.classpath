@@ -5,8 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/home/chengstone/Downloads/ClotheMe/ClotheMe/libs/logback-android-1.1.1-2.jar"/>
-	<classpathentry kind="lib" path="/home/chengstone/Downloads/ClotheMe/ClotheMe/libs/slf4j-api-1.7.6.jar"/>
-	<classpathentry kind="lib" path="/home/chengstone/Downloads/ClotheMe/ClotheMe/libs/sqlite-jdbc-3.7.15-M1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/chengstone/ClotheMe_Latest/ClotheMe/logback/logback-android-1.1.1-2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/chengstone/ClotheMe_Latest/ClotheMe/logback/slf4j-api-1.7.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
