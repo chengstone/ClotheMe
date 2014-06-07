@@ -5,11 +5,21 @@ import java.io.FileOutputStream;
 import java.io.InputStream;  
 import java.io.OutputStream;  
 import java.util.HashMap;  
+import java.util.List;
 import java.util.Map;  
   
 import com.common.clothe.*;
 import com.common.clothe.CommonDefine.CommonString;
+import com.daogen.clotheme.CategoryArchiveDao;
+import com.daogen.clotheme.DaoMaster;
+import com.daogen.clotheme.DaoMaster.OpenHelper;
+import com.daogen.clotheme.DaoSession;
+import com.daogen.clotheme.InitialFlag;
+import com.daogen.clotheme.InitialFlagDao;
+import com.daogen.clotheme.InitialFlagDao.Properties;
 import com.example.clotheme.R;
+
+import de.greenrobot.dao.query.QueryBuilder;
 //import android.R;
 import android.content.Context;  
 import android.content.SharedPreferences;  
@@ -52,6 +62,9 @@ public class AssetsDatabaseManager {
       
     // Singleton Pattern  
     private static AssetsDatabaseManager m_instance = null;  
+    
+    private static DaoMaster daoMaster = null;  
+    private static DaoSession daoSession = null;  
       
     /** 
      * Initialize AssetsDatabaseManager 
@@ -78,6 +91,90 @@ public class AssetsDatabaseManager {
       
     public SQLiteDatabase getDatabase(){
     	return getDatabase(CommonString.DATABASENAME);
+    }
+    
+    /** 
+     * @brief  取得DaoMaster 
+     *  
+     * @param  context 
+     * @return daoMaster
+     */  
+    public DaoMaster getDaoMaster() {  
+        if (daoMaster == null) {  
+            OpenHelper helper = new DaoMaster.DevOpenHelper(context,CommonDefine.CommonString.DATABASENAME, null);  
+            daoMaster = new DaoMaster(helper.getWritableDatabase());  
+        }  
+        return daoMaster;  
+    }  
+    
+    /** 
+     * @brief  取得DaoSession 
+     *  
+     * @param  context 
+     * @return daoSession
+     */  
+    public DaoSession getDaoSession() {  
+        if (daoSession == null) {  
+            if (daoMaster == null) {  
+                daoMaster = getDaoMaster();  
+            }  
+            daoSession = daoMaster.newSession();  
+        }  
+        verifyDataBaseFile(daoSession.getInitialFlagDao());
+        return daoSession;  
+    }  
+    
+    /** 
+     * @brief  取得CategoryArchiveDao 
+     *  
+     * @param  
+     * @return CategoryArchiveDao
+     */ 
+    public CategoryArchiveDao getCategoryArchiveDao(){
+    	return getDaoSession().getCategoryArchiveDao();  
+    }
+    
+    /** 
+     * @brief  判断数据库是否已经初始化，即程序是否第一次运行 
+     *  
+     * @param  初始化表DAO
+     * @return 
+     */ 
+    private void verifyDataBaseFile(InitialFlagDao in_InitialFlagDao){
+    	String dbfile = CommonString.DATABASENAME;
+    	String spath = getGreenDAODatabaseFilepath();  
+        String sfile = getGreenDAODatabaseFile(dbfile);  
+          
+        boolean initFlag = false;
+        if(in_InitialFlagDao.count() == 0){
+        	initFlag = true;
+        }
+//        else{
+//        	QueryBuilder qb = in_InitialFlagDao.queryBuilder();
+//            qb.where(Properties.InitialFlag.eq(false));
+//
+//            List youngJoes = qb.list();
+//	
+//        }
+        if(initFlag == true){
+        	InitialFlag initflag = new InitialFlag();  
+        	initflag.setInitialFlag(true);
+        	in_InitialFlagDao.insert(initflag);  
+        }
+//        File file = new File(sfile);  
+//        SharedPreferences dbs = context.getSharedPreferences(AssetsDatabaseManager.class.toString(), 0);  
+//        boolean flag = dbs.getBoolean(dbfile, false); // Get Database file flag, if true means this database file was copied and valid  
+//        if(!flag || !file.exists()){  //判断数据库文件是否存在
+//            file = new File(spath);  
+//            if(!file.exists() && !file.mkdirs()){  
+//                Log.i(tag, "Create \""+spath+"\" fail!");  
+//            }  
+//            if(!copyAssetsToFilesystem(dbfile, sfile)){  
+//                Log.i(tag, String.format("Copy %s to %s fail!", dbfile, sfile));  
+//            }  
+//              
+//            dbs.edit().putBoolean(dbfile, true).commit();  
+//        }  
     }
     /** 
      * Get a assets database, if this database is opened this method is only return a copy of the opened database 
@@ -122,10 +219,18 @@ public class AssetsDatabaseManager {
       
     private String getDatabaseFilepath(){  
         return String.format(databasepath, context.getApplicationInfo().packageName);  
+    }
+    
+    private String getGreenDAODatabaseFilepath(){  
+        return String.format(CommonDefine.CommonString.GREENDAODATABASEPATH, context.getApplicationInfo().packageName);  
     }  
       
     private String getDatabaseFile(String dbfile){  
         return getDatabaseFilepath()+"/"+dbfile;  
+    }  
+    
+    private String getGreenDAODatabaseFile(String dbfile){  
+        return getGreenDAODatabaseFilepath()+"/"+dbfile;  
     }  
       
     private boolean copyAssetsToFilesystem(String assetsSrc, String des){  

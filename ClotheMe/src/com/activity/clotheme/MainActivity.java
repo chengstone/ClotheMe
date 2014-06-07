@@ -1,5 +1,12 @@
 package com.activity.clotheme;
 
+import com.common.clothe.CommonDefine;
+import com.common.clothe.Log;
+import com.daogen.clotheme.CategoryArchive;
+import com.daogen.clotheme.CategoryArchiveDao;
+import com.daogen.clotheme.DaoMaster;
+import com.daogen.clotheme.DaoMaster.DevOpenHelper;
+import com.daogen.clotheme.DaoSession;
 import com.example.clotheme.R;
 import com.logicalModelLayer.clotheme.CategoryArchiveInfo;
 
@@ -7,6 +14,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -50,6 +58,16 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
                         }),
                 this);
         CategoryArchiveInfo.getInstance(this);
+//        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "dat.db", null);  
+//        SQLiteDatabase db = helper.getWritableDatabase();  
+//        DaoMaster daoMaster = new DaoMaster(db);  
+//        DaoSession daoSession = daoMaster.newSession();  
+//        CategoryArchiveDao noteDao = daoSession.getCategoryArchiveDao();  
+//        CategoryArchive note = new CategoryArchive(3, 2, 0, "2014/06/07 12:37:00","0");  
+//        noteDao.insert(note);  
+//        if(CommonDefine.isDebug){
+//    		Log.d("CategoryArchive Inserted!");
+//		}
     }
 
     @Override

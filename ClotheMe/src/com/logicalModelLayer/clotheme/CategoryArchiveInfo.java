@@ -10,12 +10,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.SparseArray;
 
 import com.common.clothe.*;
+import com.daogen.clotheme.CategoryArchiveDao;
 /*
- * 分类存档表类
+ * @brief 分类存档表类
  * */
 public class CategoryArchiveInfo {
 	/*
-	 * 分类存档结构
+	 * @brief 分类存档结构
 	 * */
 	public class CategoryArchiveStruct {
 //		int meterialID;					//物品ID
@@ -25,7 +26,7 @@ public class CategoryArchiveInfo {
 		//CategoryArchiveStruct(){}
 	}
 	/*
-	 * DB表名
+	 * @brief DB表名
 	 * */
 	private final String TABLENAME = "categoryarchive";
 	// Context of application  
@@ -33,24 +34,26 @@ public class CategoryArchiveInfo {
 	private SQLiteDatabase m_db;
 	private static CategoryArchiveInfo m_instance = null;  
 	/*
-	 * 分类存档表map
+	 * @brief 分类存档表map
 	 * */
 	private Map<Integer,CategoryArchiveStruct> m_CategoryArchiveData = null;
+	private CategoryArchiveDao m_CategoryArchiveDao = null;
 	/*
-	 * 分类存档表类构造函数
-	 * 参数：context 上下文
-	 * 返回值：无
+	 * @brief  分类存档表类构造函数
+	 * @param  context 上下文
+	 * @return 无
 	 * */
     private CategoryArchiveInfo(Context context) {  	
     	m_CategoryArchiveData = new HashMap<Integer,CategoryArchiveStruct>();
     	this.context = context;
-    	m_db = AssetsDatabaseManager.getInstance(context).getDatabase();
-    	Load();
+//    	m_db = AssetsDatabaseManager.getInstance(context).getDatabase();
+    	m_CategoryArchiveDao = AssetsDatabaseManager.getInstance(context).getCategoryArchiveDao();
+//    	Load();
     }  
     /*
-     * 获取本类单例
-     * 参数：context 上下文
-     * 返回值：单例
+     * @brief  获取本类单例
+     * @param  context 上下文
+     * @return 单例
      * */
     public static CategoryArchiveInfo getInstance(Context context) {  
         if(m_instance == null){
@@ -59,8 +62,8 @@ public class CategoryArchiveInfo {
         return m_instance;
     }  
     /*
-     * 加载数据库分类存档表
-     * 返回值：成功 NO_ERROR 失败 无
+     * @brief  加载数据库分类存档表
+     * @return 成功 NO_ERROR 失败 无
      * */
     public int Load(){
     	int ret = CommonDefine.NO_ERROR;
@@ -85,10 +88,10 @@ public class CategoryArchiveInfo {
     	return ret;
     }
     /* 查
-     * 从分类存档表map中获取指定key的value
-     * 参数1：in_meterialID 指定key
-     * 参数2：out_CategoryArchiveStruct value将保存其中
-     * 返回值：成功 NO_ERROR 失败 SYSTEM_ERROR
+     * @brief  从分类存档表map中获取指定key的value
+     * @param  in_meterialID 指定key
+     * @param  out_CategoryArchiveStruct value将保存其中
+     * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
     public int getCategoryArchiveStruct(int in_meterialID,CategoryArchiveStruct out_CategoryArchiveStruct){
     	if(m_CategoryArchiveData == null
@@ -115,10 +118,10 @@ public class CategoryArchiveInfo {
     	return CommonDefine.NO_ERROR;
     }
     /* 增，改
-     * 设置分类存档表map中指定key的value,如果该key已存在,则删除,添加新值
-     * 参数1：in_meterialID 指定key
-     * 参数2：in_CategoryArchiveStruct 将要写入map的value
-     * 返回值：成功 NO_ERROR 失败 SYSTEM_ERROR
+     * @brief  设置分类存档表map中指定key的value,如果该key已存在,则删除,添加新值
+     * @param  in_meterialID 指定key
+     * @param  in_CategoryArchiveStruct 将要写入map的value
+     * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
     public int setCategoryArchiveStruct(int in_meterialID,CategoryArchiveStruct in_CategoryArchiveStruct){
     	if(m_CategoryArchiveData == null
@@ -145,9 +148,9 @@ public class CategoryArchiveInfo {
     	return CommonDefine.NO_ERROR;
     }
     /* 删
-     * 从分类存档表map中删除指定key的value
-     * 参数1：in_meterialID 指定key
-     * 返回值：成功 NO_ERROR 失败 SYSTEM_ERROR
+     * @brief  从分类存档表map中删除指定key的value
+     * @param  in_meterialID 指定key
+     * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
     public int removeCategoryArchiveStruct(int in_meterialID){
     	if(m_CategoryArchiveData == null

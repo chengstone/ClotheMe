@@ -49,7 +49,7 @@ public class LogbackTool {
 		}
 	}
 	
-	public static void v(String msg){
+	public static void t(String msg){
 		if(logback != null){
 			logback.trace(msg);
 		}
