@@ -24,9 +24,23 @@ import org.slf4j.Logger;
 public class Log {
 
     protected static final String TAG = "ClotheMe";
-    private static Logger logback = null;
+//    private static Logger logback = null;
 
     public Log() {
+    }
+    
+    /**
+     * Send a TRACE log message.
+     * @param msg The message you would like logged.
+     */
+    public static void t(String msg) {
+    	if(CommonDefine.isUseLogback){
+    		Logger logback = LogbackTool.getInstance(TAG);
+    		logback.trace(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.v(TAG, buildMessage(msg));
+    	}
     }
 
     /**
@@ -35,9 +49,7 @@ public class Log {
      */
     public static void v(String msg) {
     	if(CommonDefine.isUseLogback){
-    		if(logback == null){
-    			logback = LogbackTool.getInstance(TAG);
-    		}
+    		Logger logback = LogbackTool.getInstance(TAG);
     		logback.info(buildMessage(msg));
     	}
     	else {
@@ -59,7 +71,13 @@ public class Log {
      * @param msg
      */
     public static void d(String msg) {
-        android.util.Log.d(TAG, buildMessage(msg));
+    	if(CommonDefine.isUseLogback){
+    		Logger logback = LogbackTool.getInstance(TAG);
+    		logback.debug(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.d(TAG, buildMessage(msg));
+    	}
     }
 
     /**
@@ -76,7 +94,13 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void i(String msg) {
-        android.util.Log.i(TAG, buildMessage(msg));
+    	if(CommonDefine.isUseLogback){
+    		Logger logback = LogbackTool.getInstance(TAG);
+    		logback.info(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.i(TAG, buildMessage(msg));
+    	}
     }
 
     /**
@@ -93,7 +117,13 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void e(String msg) {
-        android.util.Log.e(TAG, buildMessage(msg));
+    	if(CommonDefine.isUseLogback){
+    		Logger logback = LogbackTool.getInstance(TAG);
+    		logback.error(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.e(TAG, buildMessage(msg));
+    	}
     }
 
     /**
@@ -101,7 +131,13 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void w(String msg) {
-        android.util.Log.w(TAG, buildMessage(msg));
+    	if(CommonDefine.isUseLogback){
+    		Logger logback = LogbackTool.getInstance(TAG);
+    		logback.warn(buildMessage(msg));
+    	}
+    	else {
+    		android.util.Log.w(TAG, buildMessage(msg));
+    	}
     }
 
     /**

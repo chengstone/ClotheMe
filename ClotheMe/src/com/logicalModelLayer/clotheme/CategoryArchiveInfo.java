@@ -75,10 +75,10 @@ public class CategoryArchiveInfo {
     		cas.remindTime = cursor.getString(3);
     		m_CategoryArchiveData.put(meterialID, cas);
     		if(CommonDefine.isDebug){
-        		Log.v("meterialID = " + String.valueOf(meterialID));
-        		Log.v("isWashRemind = " + String.valueOf(cursor.getInt(2)));
-        		Log.v("remindFrequency = " + cas.remindFrequency);
-        		Log.v("remindTime = " + cas.remindTime);
+        		Log.d("meterialID = " + String.valueOf(meterialID));
+        		Log.d("isWashRemind = " + String.valueOf(cursor.getInt(2)));
+        		Log.d("remindFrequency = " + cas.remindFrequency);
+        		Log.d("remindTime = " + cas.remindTime);
     		}
     	}
     	cursor.close();
@@ -94,30 +94,22 @@ public class CategoryArchiveInfo {
     	if(m_CategoryArchiveData == null
     	|| out_CategoryArchiveStruct == null
     	|| in_meterialID <= 0){
-    		if(CommonDefine.isDebug){
-        		Log.v("return SYSTEM_ERROR");
-    		}
+        	Log.w("return SYSTEM_ERROR");
     		return CommonDefine.SYSTEM_ERROR;
     	}
     	if(m_CategoryArchiveData.isEmpty() == true){
-    		if(CommonDefine.isDebug){
-        		Log.v("m_CategoryArchiveData is Empty");
-    		}
+    		Log.w("m_CategoryArchiveData is Empty");
     		return CommonDefine.SYSTEM_ERROR;
     	}
     	if(m_CategoryArchiveData.containsKey(in_meterialID) == true){
     		out_CategoryArchiveStruct = m_CategoryArchiveData.get(in_meterialID);
     		if(out_CategoryArchiveStruct == null){
-    			if(CommonDefine.isDebug){
-            		Log.v("get failed");
-        		}
+            	Log.w("get failed");
         		return CommonDefine.SYSTEM_ERROR;
     		}
     	}
     	else {
-    		if(CommonDefine.isDebug){
-        		Log.v("m_CategoryArchiveData does not contains key " + String.valueOf(in_meterialID));
-    		}
+        	Log.w("m_CategoryArchiveData does not contains key " + String.valueOf(in_meterialID));
     		return CommonDefine.SYSTEM_ERROR;
     	}
     	return CommonDefine.NO_ERROR;
@@ -132,29 +124,21 @@ public class CategoryArchiveInfo {
     	if(m_CategoryArchiveData == null
     	|| in_CategoryArchiveStruct == null
     	|| in_meterialID <= 0){
-    		if(CommonDefine.isDebug){
-        		Log.v("return SYSTEM_ERROR");
-    		}
+        	Log.w("return SYSTEM_ERROR");
     		return CommonDefine.SYSTEM_ERROR;
     	}
 
     	if(m_CategoryArchiveData.containsKey(in_meterialID) == true){
-    		if(CommonDefine.isDebug){
-        		Log.v("meterialID " + String.valueOf(in_meterialID) + " is already exsists");
-    		}
+        	Log.w("meterialID " + String.valueOf(in_meterialID) + " is already exsists");
     		if(m_CategoryArchiveData.remove(in_meterialID) == null){
-    			if(CommonDefine.isDebug){
-            		Log.v("remove failed");
-        		}
+            	Log.w("remove failed");
         		return CommonDefine.SYSTEM_ERROR;
     		}
 //    		return CommonDefine.SYSTEM_ERROR;
     	}
 
     	if(m_CategoryArchiveData.put(in_meterialID,in_CategoryArchiveStruct) == null){
-    		if(CommonDefine.isDebug){
-        		Log.v("put failed");
-    		}
+        	Log.w("put failed");
     		return CommonDefine.SYSTEM_ERROR;
     	}
 
@@ -168,29 +152,21 @@ public class CategoryArchiveInfo {
     public int removeCategoryArchiveStruct(int in_meterialID){
     	if(m_CategoryArchiveData == null
     	|| in_meterialID <= 0){
-    		if(CommonDefine.isDebug){
-        		Log.v("return SYSTEM_ERROR");
-    		}
+        	Log.w("return SYSTEM_ERROR");
     		return CommonDefine.SYSTEM_ERROR;
     	}
     	if(m_CategoryArchiveData.isEmpty() == true){
-    		if(CommonDefine.isDebug){
-        		Log.v("m_CategoryArchiveData is Empty");
-    		}
+        	Log.w("m_CategoryArchiveData is Empty");
     		return CommonDefine.NO_ERROR;
     	}
     	if(m_CategoryArchiveData.containsKey(in_meterialID) == true){
     		if(m_CategoryArchiveData.remove(in_meterialID) == null){
-    			if(CommonDefine.isDebug){
-            		Log.v("remove failed");
-        		}
+            	Log.w("remove failed");
         		return CommonDefine.SYSTEM_ERROR;
     		}
     	}
     	else {
-    		if(CommonDefine.isDebug){
-        		Log.v("m_CategoryArchiveData does not contains key " + String.valueOf(in_meterialID));
-    		}
+        	Log.w("m_CategoryArchiveData does not contains key " + String.valueOf(in_meterialID));
     		return CommonDefine.NO_ERROR;
     	}
     	return CommonDefine.NO_ERROR;

@@ -18,19 +18,75 @@ public class MainActivity extends Activity {
 } -->
 <configuration>
 <!-- <configuration> -->
-  <includes>
-    <!-- <include file="/sdcard/logback/logback.xml"/> -->
+<!--   <includes>
+    <include file="/sdcard/logback/logback.xml"/>
     <include resource="AndroidManifest.xml"/>
     <include resource="assets/logback.xml"/>
-  </includes>
+  </includes> -->
 <!-- </configuration> -->
-  <property name="LOG_DIR" value="/data/data/com.ClotheMe/files" />
+<!-- ${user.dir}/xxx/files -->
+  <property name="LOG_DIR" value="/data/data/com.example.clotheme/files" />
 
+  <!-- <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${user.dir}/logs/jtheque.log</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+				<FileNamePattern>logs/jtheque.%i.log.zip</FileNamePattern>
+				<MinIndex>1</MinIndex>
+				<MaxIndex>5</MaxIndex>
+			</rollingPolicy>
+			<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+				<MaxFileSize>5MB</MaxFileSize>
+			</triggeringPolicy>
+			<layout class="ch.qos.logback.classic.PatternLayout">
+			     <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+			</layout>
+		</appender> -->
+  
   <!-- Create a logcat appender -->
   <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
     <encoder>
       <pattern>%msg</pattern>
     </encoder>
+  </appender>
+  
+  <appender name="logcatFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--     <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>TRACE</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter> -->
+	<lazy>true</lazy>
+    <file>${LOG_DIR}/logcatFile.log</file>
+
+    <!-- <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+        <FileNamePattern>${LOG_DIR}/jtheque.%i.log.zip</FileNamePattern>
+        <MinIndex>1</MinIndex>
+        <MaxIndex>5</MaxIndex>
+    </rollingPolicy> -->
+    
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <FileNamePattern>${LOG_DIR}/logFile.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- or whenever the file size reaches 100MB -->
+            <maxFileSize>5MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+        <!-- keep 7 days' worth of history -->
+        <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    
+    <!-- <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <MaxFileSize>5MB</MaxFileSize>
+    </triggeringPolicy> -->
+    
+    <encoder>
+      <!-- <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+      <pattern>%d{yyyy/MM/dd-HH:mm:ss.SSS} [%thread] %-5level %logger{36} %caller{1} - %msg%n</pattern>
+    </encoder>
+    <!-- <encoder>
+      <pattern>%msg</pattern>
+    </encoder> -->
   </appender>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -46,7 +102,7 @@ public class MainActivity extends Activity {
       <onMatch>ACCEPT</onMatch>
       <onMismatch>DENY</onMismatch>
     </filter>
-
+	<lazy>true</lazy>
     <file>${LOG_DIR}/trace.log</file>
 
     <encoder>
@@ -61,7 +117,7 @@ public class MainActivity extends Activity {
       <onMatch>ACCEPT</onMatch>
       <onMismatch>DENY</onMismatch>
     </filter>
-
+	<lazy>true</lazy>
     <file>${LOG_DIR}/debug.log</file>
 
     <encoder>
@@ -76,7 +132,7 @@ public class MainActivity extends Activity {
       <onMatch>ACCEPT</onMatch>
       <onMismatch>DENY</onMismatch>
     </filter>
-
+	<lazy>true</lazy>
     <file>${LOG_DIR}/warn.log</file>
 
     <encoder>
@@ -91,7 +147,7 @@ public class MainActivity extends Activity {
       <onMatch>ACCEPT</onMatch>
       <onMismatch>DENY</onMismatch>
     </filter>
-
+	<lazy>true</lazy>
     <file>${LOG_DIR}/error.log</file>
 
     <encoder>
@@ -124,14 +180,15 @@ public class MainActivity extends Activity {
   </root> -->
 
   <!-- Write INFO (and higher-level) messages to logcat -->
-  <root level="INFO">
+  <root level="TRACE">
+    <appender-ref ref="logcatFile" />
     <appender-ref ref="logcat" />
   </root>
   
-  <root level="debug">
+<!--   <root level="debug">
     <appender-ref ref="DebugLog" />
     <appender-ref ref="STDOUT" />
-  </root>
+  </root> -->
   
   <!-- 
 level of
