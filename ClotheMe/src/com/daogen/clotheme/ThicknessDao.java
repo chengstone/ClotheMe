@@ -24,7 +24,7 @@ public class ThicknessDao extends AbstractDao<Thickness, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, long.class, "id", true, "_id");
-        public final static Property Thickness = new Property(1, Integer.class, "Thickness", false, "THICKNESS");
+        public final static Property Thickness = new Property(1, String.class, "Thickness", false, "THICKNESS");
         public final static Property Temperature = new Property(2, Integer.class, "Temperature", false, "TEMPERATURE");
         public final static Property Whether = new Property(3, String.class, "Whether", false, "WHETHER");
     };
@@ -43,7 +43,7 @@ public class ThicknessDao extends AbstractDao<Thickness, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'Thickness' (" + //
                 "'_id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
-                "'THICKNESS' INTEGER," + // 1: Thickness
+                "'THICKNESS' TEXT," + // 1: Thickness
                 "'TEMPERATURE' INTEGER," + // 2: Temperature
                 "'WHETHER' TEXT);"); // 3: Whether
     }
@@ -60,9 +60,9 @@ public class ThicknessDao extends AbstractDao<Thickness, Long> {
         stmt.clearBindings();
         stmt.bindLong(1, entity.getId());
  
-        Integer Thickness = entity.getThickness();
+        String Thickness = entity.getThickness();
         if (Thickness != null) {
-            stmt.bindLong(2, Thickness);
+            stmt.bindString(2, Thickness);
         }
  
         Integer Temperature = entity.getTemperature();
@@ -87,7 +87,7 @@ public class ThicknessDao extends AbstractDao<Thickness, Long> {
     public Thickness readEntity(Cursor cursor, int offset) {
         Thickness entity = new Thickness( //
             cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // Thickness
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // Thickness
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // Temperature
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // Whether
         );
@@ -98,7 +98,7 @@ public class ThicknessDao extends AbstractDao<Thickness, Long> {
     @Override
     public void readEntity(Cursor cursor, Thickness entity, int offset) {
         entity.setId(cursor.getLong(offset + 0));
-        entity.setThickness(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setThickness(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTemperature(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
         entity.setWhether(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }

@@ -59,12 +59,12 @@ public class ClotheMeDaoGenerator {
         addThickness(schema);
         addWearPlace(schema);
         addMeterial(schema);
-        addPeapleInfo(schema);
+        addPeopleInfo(schema);
         addSeason(schema);
         addStorageLocation(schema);
 //        addCustomerOrder(schema);
 
-        new DaoGenerator().generateAll(schema, "/Users/chengstone/ClotheMe_Latest/ClotheMe/src/com/daogen/clotheme");
+        new DaoGenerator().generateAll(schema, "/Users/chengstone/Documents/workspace/ClotheMe/src/com/daogen/clotheme");
     }
 
     private static void addCategoryArchive(Schema schema) {
@@ -105,7 +105,7 @@ public class ClotheMeDaoGenerator {
     private static void addThickness(Schema schema) {
         Entity Thickness = schema.addEntity("Thickness");
         Thickness.addIdProperty().notNull().primaryKey().autoincrement();
-        Thickness.addIntProperty("Thickness");
+        Thickness.addStringProperty("Thickness");
         Thickness.addIntProperty("Temperature");
         Thickness.addStringProperty("Whether");
         Thickness.setTableName("Thickness");
@@ -139,12 +139,12 @@ public class ClotheMeDaoGenerator {
 //        CategoryArchive.addDateProperty("date");
     }
     
-    private static void addPeapleInfo(Schema schema) {
-        Entity PeapleInfo = schema.addEntity("PeapleInfo");
-        PeapleInfo.addIdProperty().notNull().primaryKey().autoincrement();
-        PeapleInfo.addStringProperty("PersonName");
-        PeapleInfo.addIntProperty("StyleID");
-        PeapleInfo.setTableName("PeapleInfo");
+    private static void addPeopleInfo(Schema schema) {
+        Entity PeopleInfo = schema.addEntity("PeopleInfo");
+        PeopleInfo.addIdProperty().notNull().primaryKey().autoincrement();
+        PeopleInfo.addStringProperty("PersonName");
+        PeopleInfo.addIntProperty("StyleID");
+        PeopleInfo.setTableName("PeopleInfo");
 //        CategoryArchive.addDateProperty("date");
     }
     

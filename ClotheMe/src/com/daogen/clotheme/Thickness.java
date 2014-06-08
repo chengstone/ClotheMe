@@ -10,7 +10,7 @@ package com.daogen.clotheme;
 public class Thickness {
 
     private long id;
-    private Integer Thickness;
+    private String Thickness;
     private Integer Temperature;
     private String Whether;
 
@@ -24,7 +24,7 @@ public class Thickness {
         this.id = id;
     }
 
-    public Thickness(long id, Integer Thickness, Integer Temperature, String Whether) {
+    public Thickness(long id, String Thickness, Integer Temperature, String Whether) {
         this.id = id;
         this.Thickness = Thickness;
         this.Temperature = Temperature;
@@ -39,11 +39,11 @@ public class Thickness {
         this.id = id;
     }
 
-    public Integer getThickness() {
+    public String getThickness() {
         return Thickness;
     }
 
-    public void setThickness(Integer Thickness) {
+    public void setThickness(String Thickness) {
         this.Thickness = Thickness;
     }
 

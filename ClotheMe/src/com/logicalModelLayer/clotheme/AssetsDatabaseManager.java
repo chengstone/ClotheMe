@@ -10,13 +10,30 @@ import java.util.Map;
   
 import com.common.clothe.*;
 import com.common.clothe.CommonDefine.CommonString;
+import com.daogen.clotheme.Category;
+import com.daogen.clotheme.CategoryArchive;
 import com.daogen.clotheme.CategoryArchiveDao;
+import com.daogen.clotheme.CategoryDao;
 import com.daogen.clotheme.DaoMaster;
 import com.daogen.clotheme.DaoMaster.OpenHelper;
 import com.daogen.clotheme.DaoSession;
 import com.daogen.clotheme.InitialFlag;
 import com.daogen.clotheme.InitialFlagDao;
 import com.daogen.clotheme.InitialFlagDao.Properties;
+import com.daogen.clotheme.Meterial;
+import com.daogen.clotheme.MeterialDao;
+import com.daogen.clotheme.PeopleInfo;
+import com.daogen.clotheme.PeopleInfoDao;
+import com.daogen.clotheme.Season;
+import com.daogen.clotheme.SeasonDao;
+import com.daogen.clotheme.StorageLocation;
+import com.daogen.clotheme.StorageLocationDao;
+import com.daogen.clotheme.Style;
+import com.daogen.clotheme.StyleDao;
+import com.daogen.clotheme.Thickness;
+import com.daogen.clotheme.ThicknessDao;
+import com.daogen.clotheme.WearPlace;
+import com.daogen.clotheme.WearPlaceDao;
 import com.example.clotheme.R;
 
 import de.greenrobot.dao.query.QueryBuilder;
@@ -120,30 +137,163 @@ public class AssetsDatabaseManager {
             }  
             daoSession = daoMaster.newSession();  
         }  
-        verifyDataBaseFile(daoSession.getInitialFlagDao());
+        verifyDataBaseFile();
         return daoSession;  
     }  
     
     /** 
-     * @brief  取得CategoryArchiveDao 
+     * @brief  对数据库进行数据初始化，将预先数据写入数据库 
      *  
-     * @param  
-     * @return CategoryArchiveDao
-     */ 
-    public CategoryArchiveDao getCategoryArchiveDao(){
-    	return getDaoSession().getCategoryArchiveDao();  
+     * @param   
+     * @return 
+     */  
+    private void InitOriginalData(){
+    	Log.d(tag, "开始数据初始化。");
+    	//初始数据
+    	//Season
+    	Log.d(tag, "开始Season数据初始化。");
+    	SeasonDao seasonDao = daoSession.getSeasonDao();
+    	Season[] season = new Season[4];  
+    	for(int i = 0;i < 4;i++){
+    		season[i] = new Season();
+    		season[i].setId(i);
+    	}
+
+    	season[0].setSeason("春");
+    	season[0].setRecommendedThick(5);
+    	season[0].setProbablyTemp("10");
+
+    	season[1].setSeason("夏");
+    	season[1].setRecommendedThick(1);
+    	season[1].setProbablyTemp("30");
+
+    	season[2].setSeason("秋");
+    	season[2].setRecommendedThick(7);
+    	season[2].setProbablyTemp("5");
+
+    	season[3].setSeason("冬");
+    	season[3].setRecommendedThick(10);
+    	season[3].setProbablyTemp("-20");
+
+    	for(int i = 0; i < 4; i++){
+    		seasonDao.insert(season[i]); 
+    	}
+
+    	//Style
+    	Log.d(tag, "开始Style数据初始化。");
+    	StyleDao styleDao = daoSession.getStyleDao();
+    	Style[] style = new Style[10];  
+    	for(int i = 0;i < 10;i++){
+    		style[i] = new Style();
+    		style[i].setId(i);
+    	}
+    	
+    	style[0].setStyle("性感");
+    	style[1].setStyle("保守");
+    	style[2].setStyle("流行");
+    	style[3].setStyle("孤款");
+    	style[4].setStyle("百搭");
+    	style[5].setStyle("抢眼");
+    	style[6].setStyle("昂贵");
+    	style[7].setStyle("实惠");
+    	style[8].setStyle("正式");
+    	style[9].setStyle("休息");
+    	
+    	for(int i = 0; i < 10; i++){
+    		styleDao.insert(style[i]);
+    	}
+    	 
+
+    	//Category
+    	Log.d(tag, "开始Category数据初始化。");
+    	CategoryDao categoryDao = daoSession.getCategoryDao();
+    	Category[] category = new Category[9];  
+    	for(int i = 0;i < 9;i++){
+    		category[i] = new Category();
+    		category[i].setId(i);
+    		category[i].setIsSubCategory(0);
+        	category[i].setBelongCategoryID(0);
+    	}
+
+    	category[0].setName("袜子");
+    	category[1].setName("包");
+    	category[2].setName("鞋");
+    	category[3].setName("外套");
+    	category[4].setName("上衣");
+    	category[5].setName("裤子");
+    	category[6].setName("半身裙");
+    	category[7].setName("帽子围巾手套");
+    	category[8].setName("连身装");
+
+    	for(int i = 0; i < 9; i++){
+    		categoryDao.insert(category[i]); 
+    	}
+    	
+    	//WearPlace
+    	Log.d(tag, "开始WearPlace数据初始化。");
+    	WearPlaceDao wearPlaceDao = daoSession.getWearPlaceDao();
+    	WearPlace wearPlace = new WearPlace();  
+    	wearPlace.setWearPlace("户外");
+    	wearPlaceDao.insert(wearPlace); 
+    	//Thickness
+    	Log.d(tag, "开始Thickness数据初始化。");
+    	ThicknessDao thicknessDao = daoSession.getThicknessDao();
+    	Thickness thickness = new Thickness();  
+    	thickness.setThickness("偏薄");
+    	thickness.setTemperature(10);
+    	thickness.setWhether("晴");
+    	thicknessDao.insert(thickness); 
+    	
+    	//测试数据
+    	if(CommonDefine.isInTesting){
+    		Log.d(tag, "开始测试数据初始化。");
+    	//StorageLocation
+    	StorageLocationDao storageLocationDao = daoSession.getStorageLocationDao();
+    	StorageLocation storageLocation = new StorageLocation();  
+    	storageLocation.setLocation("衣柜");
+    	storageLocationDao.insert(storageLocation); 
+    	//PeopleInfo
+    	PeopleInfoDao peopleInfoDao = daoSession.getPeopleInfoDao();
+    	PeopleInfo peopleInfo = new PeopleInfo();  
+    	peopleInfo.setPersonName("chengstone");
+    	peopleInfo.setStyleID(2);
+    	peopleInfoDao.insert(peopleInfo); 
+    	//Meterial
+    	MeterialDao meterialDao = daoSession.getMeterialDao();
+    	Meterial meterial = new Meterial();
+    	meterial.setDescription("裤子");
+    	meterial.setBelongCategoryID(5);
+    	meterial.setLocationID(1);
+    	meterial.setPersonID(1);
+    	meterial.setSeasonID(1);
+    	meterial.setLastWashDate("2014/05/01");
+    	meterial.setThicknessID(1);
+    	meterial.setUseDate("2014/05/10");
+    	meterial.setWearPlaceID("1");
+    	meterial.setStyleID(2);
+    	meterialDao.insert(meterial);
+    	//CategoryArchive
+    	CategoryArchiveDao categoryArchiveDao = daoSession.getCategoryArchiveDao();
+    	CategoryArchive categoryArchive = new CategoryArchive();  
+    	categoryArchive.setMeterialID(1);
+    	categoryArchive.setIsWashRemind(0);
+    	categoryArchive.setRemindTime("2014/05/15 20:00:00");
+    	categoryArchive.setRemindFrequency("0");
+    	categoryArchiveDao.insert(categoryArchive); 
+    	}
+    	Log.d(tag, "数据库初始化结束。");
     }
-    
     /** 
      * @brief  判断数据库是否已经初始化，即程序是否第一次运行 
      *  
      * @param  初始化表DAO
      * @return 
      */ 
-    private void verifyDataBaseFile(InitialFlagDao in_InitialFlagDao){
+    private void verifyDataBaseFile(){
     	String dbfile = CommonString.DATABASENAME;
     	String spath = getGreenDAODatabaseFilepath();  
         String sfile = getGreenDAODatabaseFile(dbfile);  
+        InitialFlagDao in_InitialFlagDao = daoSession.getInitialFlagDao();
           
         boolean initFlag = false;
         if(in_InitialFlagDao.count() == 0){
@@ -157,6 +307,8 @@ public class AssetsDatabaseManager {
 //	
 //        }
         if(initFlag == true){
+        	InitOriginalData();
+        	
         	InitialFlag initflag = new InitialFlag();  
         	initflag.setInitialFlag(true);
         	in_InitialFlagDao.insert(initflag);  
@@ -176,6 +328,97 @@ public class AssetsDatabaseManager {
 //            dbs.edit().putBoolean(dbfile, true).commit();  
 //        }  
     }
+    
+    /** 
+     * @brief  取得CategoryArchiveDao 
+     *  
+     * @param  
+     * @return CategoryArchiveDao
+     */ 
+    public CategoryArchiveDao getCategoryArchiveDao(){
+    	return getDaoSession().getCategoryArchiveDao();  
+    }
+    
+    /** 
+     * @brief  取得CategoryDao 
+     *  
+     * @param  
+     * @return CategoryDao
+     */ 
+    public CategoryDao getCategoryDao(){
+    	return getDaoSession().getCategoryDao();  
+    }
+    
+    /** 
+     * @brief  取得StyleDao 
+     *  
+     * @param  
+     * @return StyleDao
+     */ 
+    public StyleDao getStyleDao(){
+    	return getDaoSession().getStyleDao();  
+    }
+    
+    /** 
+     * @brief  取得ThicknessDao 
+     *  
+     * @param  
+     * @return ThicknessDao
+     */ 
+    public ThicknessDao getThicknessDao(){
+    	return getDaoSession().getThicknessDao();  
+    }
+    
+    /** 
+     * @brief  取得WearPlaceDao 
+     *  
+     * @param  
+     * @return WearPlaceDao
+     */ 
+    public WearPlaceDao getWearPlaceDao(){
+    	return getDaoSession().getWearPlaceDao();  
+    }
+    
+    /** 
+     * @brief  取得MeterialDao 
+     *  
+     * @param  
+     * @return MeterialDao
+     */ 
+    public MeterialDao getMeterialDao(){
+    	return getDaoSession().getMeterialDao();  
+    }
+    
+    /** 
+     * @brief  取得PeopleInfoDao 
+     *  
+     * @param  
+     * @return PeopleInfoDao
+     */ 
+    public PeopleInfoDao getPeopleInfoDao(){
+    	return getDaoSession().getPeopleInfoDao();  
+    }
+    
+    /** 
+     * @brief  取得SeasonDao 
+     *  
+     * @param  
+     * @return SeasonDao
+     */ 
+    public SeasonDao getSeasonDao(){
+    	return getDaoSession().getSeasonDao();  
+    }
+    
+    /** 
+     * @brief  取得StorageLocationDao 
+     *  
+     * @param  
+     * @return StorageLocationDao
+     */ 
+    public StorageLocationDao getStorageLocationDao(){
+    	return getDaoSession().getStorageLocationDao();  
+    }
+    
     /** 
      * Get a assets database, if this database is opened this method is only return a copy of the opened database 
      * @param dbfile, the assets file which will be opened for a database 

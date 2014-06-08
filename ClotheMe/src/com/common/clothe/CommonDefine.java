@@ -11,6 +11,8 @@ public class CommonDefine {
         public static final boolean isDebug = true;
         //是否使用greenDAO
         public static final boolean isUseGreenDAO = false;
+        //测试数据、代码
+        public static final boolean isInTesting = true;
 
         public static final class CommonString {
         	//数据库文件路径

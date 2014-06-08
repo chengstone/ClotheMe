@@ -15,7 +15,7 @@ import com.daogen.clotheme.StyleDao;
 import com.daogen.clotheme.ThicknessDao;
 import com.daogen.clotheme.WearPlaceDao;
 import com.daogen.clotheme.MeterialDao;
-import com.daogen.clotheme.PeapleInfoDao;
+import com.daogen.clotheme.PeopleInfoDao;
 import com.daogen.clotheme.SeasonDao;
 import com.daogen.clotheme.StorageLocationDao;
 
@@ -35,7 +35,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ThicknessDao.createTable(db, ifNotExists);
         WearPlaceDao.createTable(db, ifNotExists);
         MeterialDao.createTable(db, ifNotExists);
-        PeapleInfoDao.createTable(db, ifNotExists);
+        PeopleInfoDao.createTable(db, ifNotExists);
         SeasonDao.createTable(db, ifNotExists);
         StorageLocationDao.createTable(db, ifNotExists);
     }
@@ -49,7 +49,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ThicknessDao.dropTable(db, ifExists);
         WearPlaceDao.dropTable(db, ifExists);
         MeterialDao.dropTable(db, ifExists);
-        PeapleInfoDao.dropTable(db, ifExists);
+        PeopleInfoDao.dropTable(db, ifExists);
         SeasonDao.dropTable(db, ifExists);
         StorageLocationDao.dropTable(db, ifExists);
     }
@@ -90,7 +90,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ThicknessDao.class);
         registerDaoClass(WearPlaceDao.class);
         registerDaoClass(MeterialDao.class);
-        registerDaoClass(PeapleInfoDao.class);
+        registerDaoClass(PeopleInfoDao.class);
         registerDaoClass(SeasonDao.class);
         registerDaoClass(StorageLocationDao.class);
     }
