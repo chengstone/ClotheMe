@@ -16,7 +16,7 @@ import com.daogen.clotheme.Style;
 import com.daogen.clotheme.Thickness;
 import com.daogen.clotheme.WearPlace;
 import com.daogen.clotheme.Meterial;
-import com.daogen.clotheme.PeopleInfo;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.Season;
 import com.daogen.clotheme.StorageLocation;
 
@@ -27,7 +27,7 @@ import com.daogen.clotheme.StyleDao;
 import com.daogen.clotheme.ThicknessDao;
 import com.daogen.clotheme.WearPlaceDao;
 import com.daogen.clotheme.MeterialDao;
-import com.daogen.clotheme.PeopleInfoDao;
+import com.daogen.clotheme.PersonInformationDao;
 import com.daogen.clotheme.SeasonDao;
 import com.daogen.clotheme.StorageLocationDao;
 
@@ -47,7 +47,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig thicknessDaoConfig;
     private final DaoConfig wearPlaceDaoConfig;
     private final DaoConfig meterialDaoConfig;
-    private final DaoConfig peopleInfoDaoConfig;
+    private final DaoConfig personInformationDaoConfig;
     private final DaoConfig seasonDaoConfig;
     private final DaoConfig storageLocationDaoConfig;
 
@@ -58,7 +58,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ThicknessDao thicknessDao;
     private final WearPlaceDao wearPlaceDao;
     private final MeterialDao meterialDao;
-    private final PeopleInfoDao peopleInfoDao;
+    private final PersonInformationDao personInformationDao;
     private final SeasonDao seasonDao;
     private final StorageLocationDao storageLocationDao;
 
@@ -87,8 +87,8 @@ public class DaoSession extends AbstractDaoSession {
         meterialDaoConfig = daoConfigMap.get(MeterialDao.class).clone();
         meterialDaoConfig.initIdentityScope(type);
 
-        peopleInfoDaoConfig = daoConfigMap.get(PeopleInfoDao.class).clone();
-        peopleInfoDaoConfig.initIdentityScope(type);
+        personInformationDaoConfig = daoConfigMap.get(PersonInformationDao.class).clone();
+        personInformationDaoConfig.initIdentityScope(type);
 
         seasonDaoConfig = daoConfigMap.get(SeasonDao.class).clone();
         seasonDaoConfig.initIdentityScope(type);
@@ -103,7 +103,7 @@ public class DaoSession extends AbstractDaoSession {
         thicknessDao = new ThicknessDao(thicknessDaoConfig, this);
         wearPlaceDao = new WearPlaceDao(wearPlaceDaoConfig, this);
         meterialDao = new MeterialDao(meterialDaoConfig, this);
-        peopleInfoDao = new PeopleInfoDao(peopleInfoDaoConfig, this);
+        personInformationDao = new PersonInformationDao(personInformationDaoConfig, this);
         seasonDao = new SeasonDao(seasonDaoConfig, this);
         storageLocationDao = new StorageLocationDao(storageLocationDaoConfig, this);
 
@@ -114,7 +114,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Thickness.class, thicknessDao);
         registerDao(WearPlace.class, wearPlaceDao);
         registerDao(Meterial.class, meterialDao);
-        registerDao(PeopleInfo.class, peopleInfoDao);
+        registerDao(PersonInformation.class, personInformationDao);
         registerDao(Season.class, seasonDao);
         registerDao(StorageLocation.class, storageLocationDao);
     }
@@ -127,7 +127,7 @@ public class DaoSession extends AbstractDaoSession {
         thicknessDaoConfig.getIdentityScope().clear();
         wearPlaceDaoConfig.getIdentityScope().clear();
         meterialDaoConfig.getIdentityScope().clear();
-        peopleInfoDaoConfig.getIdentityScope().clear();
+        personInformationDaoConfig.getIdentityScope().clear();
         seasonDaoConfig.getIdentityScope().clear();
         storageLocationDaoConfig.getIdentityScope().clear();
     }
@@ -160,8 +160,8 @@ public class DaoSession extends AbstractDaoSession {
         return meterialDao;
     }
 
-    public PeopleInfoDao getPeopleInfoDao() {
-        return peopleInfoDao;
+    public PersonInformationDao getPersonInformationDao() {
+        return personInformationDao;
     }
 
     public SeasonDao getSeasonDao() {

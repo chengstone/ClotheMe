@@ -59,7 +59,7 @@ public class ClotheMeDaoGenerator {
         addThickness(schema);
         addWearPlace(schema);
         addMeterial(schema);
-        addPeopleInfo(schema);
+        addPersonInfo(schema);
         addSeason(schema);
         addStorageLocation(schema);
 //        addCustomerOrder(schema);
@@ -139,12 +139,12 @@ public class ClotheMeDaoGenerator {
 //        CategoryArchive.addDateProperty("date");
     }
     
-    private static void addPeopleInfo(Schema schema) {
-        Entity PeopleInfo = schema.addEntity("PeopleInfo");
+    private static void addPersonInfo(Schema schema) {
+        Entity PeopleInfo = schema.addEntity("PersonInformation");
         PeopleInfo.addIdProperty().notNull().primaryKey().autoincrement();
         PeopleInfo.addStringProperty("PersonName");
         PeopleInfo.addIntProperty("StyleID");
-        PeopleInfo.setTableName("PeopleInfo");
+        PeopleInfo.setTableName("PersonInformation");
 //        CategoryArchive.addDateProperty("date");
     }
     

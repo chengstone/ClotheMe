@@ -8,7 +8,7 @@ import com.daogen.clotheme.DaoMaster;
 import com.daogen.clotheme.DaoMaster.DevOpenHelper;
 import com.daogen.clotheme.DaoSession;
 import com.example.clotheme.R;
-import com.logicalModelLayer.clotheme.CategoryArchiveInfo;
+import com.logicalModelLayer.Implements.CategoryArchiveInfo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
