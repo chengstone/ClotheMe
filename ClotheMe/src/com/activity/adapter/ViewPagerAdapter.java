@@ -1,7 +1,7 @@
 package com.activity.adapter;
 
 
-import com.activity.fragments.Fragment_0;
+import com.activity.fragments.HomePageFragment;
 
 import android.support.v4.app.Fragment;  
 import android.support.v4.app.FragmentManager;  
@@ -26,13 +26,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         switch(Index)  
         {  
           case Fragment_Index_0:  
-              mFragemnt=new Fragment_0();  
+              mFragemnt=new HomePageFragment();  
               break;  
           case Fragment_Index_1:  
-              mFragemnt=new Fragment_0();  
+              mFragemnt=new HomePageFragment();  
               break;  
           case Fragment_Index_2:  
-              mFragemnt=new Fragment_0();  
+              mFragemnt=new HomePageFragment();  
               break;  
         }  
         return mFragemnt;  
