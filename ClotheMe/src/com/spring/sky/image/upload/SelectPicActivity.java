@@ -41,6 +41,8 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 	 * 从Intent获取图片路径的KEY
 	 */
 	public static final String KEY_PHOTO_PATH = "photo_path";
+	public static final String KEY_SELECT_PICTURE_FLAG = "KEY_SELECT_PICTURE_FLAG";
+//	public static final String KEY_TAKE_PICTURE_FLAG = "KEY_TAKE_PICTURE_FLAG";
 	
 	private static final String TAG = "SelectPicActivity";
 	
@@ -178,6 +180,12 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 		if(picPath != null && ( picPath.endsWith(".png") || picPath.endsWith(".PNG") ||picPath.endsWith(".jpg") ||picPath.endsWith(".JPG")  ))
 		{
 			lastIntent.putExtra(KEY_PHOTO_PATH, picPath);
+			if(requestCode == SELECT_PIC_BY_PICK_PHOTO ) {
+				lastIntent.putExtra(KEY_SELECT_PICTURE_FLAG, 1);
+			}
+			else {
+				lastIntent.putExtra(KEY_SELECT_PICTURE_FLAG, 0);
+			}
 			setResult(Activity.RESULT_OK, lastIntent);
 			finish();
 		}else{

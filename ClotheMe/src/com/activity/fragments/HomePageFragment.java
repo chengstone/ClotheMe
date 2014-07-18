@@ -3,11 +3,14 @@ package com.activity.fragments;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import com.activity.clotheme.ImagePreviewActivity;
 import com.common.clothe.CommonDefine;
 import com.example.clotheme.R;
+import com.functionCtrl.clotheme.BitmapUtil;
+import com.functionCtrl.clotheme.ImageCacheUtil;
 import com.functionCtrl.clotheme.PictureOperatingCtrl;
 import com.spring.sky.image.upload.SelectPicActivity;
 
@@ -32,6 +35,7 @@ public class HomePageFragment extends Fragment {
 	private String fileName;
 	private static String picturepath = CommonDefine.CommonString.PICTUREPATH;
 
+	private int pickPictureflag;	//1-select picture 0-take picture
 	Button btn;
 	public final static String PAIZHAO = "android.intent.action.PAIZHAO";
 	public final static String TAKE_PIC = "android.media.action.IMAGE_CAPTURE";
@@ -75,12 +79,24 @@ public class HomePageFragment extends Fragment {
 		if (resultCode == Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO) {
 			String picPath = data
 					.getStringExtra(SelectPicActivity.KEY_PHOTO_PATH);
+			pickPictureflag = data.getIntExtra(SelectPicActivity.KEY_SELECT_PICTURE_FLAG, 0);
 			Toast.makeText(HomePageFragment.this.getActivity(),
 					"最终选择的图片=" + picPath, Toast.LENGTH_LONG).show();
 //			com.common.clothe.Log.i("最终选择的图片=" + picPath);
-			photo = BitmapFactory.decodeFile(picPath);
+//			 try {  
+//				 photo = BitmapUtil.getBitmapByPath(picPath, BitmapUtil.getOptions(picPath), 200, 200);  
+//				 photo = ImageCacheUtil.getResizedBitmap(null, null,   
+//						 HomePageFragment.this.getActivity(), data.getData(), target, false);  
+				 PictureOperatingCtrl poc = new PictureOperatingCtrl();
+				 photo = poc.getBitmapSafely(picPath);
+				 fileName = picPath;
+//			 } catch (FileNotFoundException e) {  
+//				  e.printStackTrace();  
+//				 }  
+//			photo = BitmapFactory.decodeFile(picPath);
 //			imageView.setImageBitmap(photo);
 			DoActivityResult(requestCode, resultCode, data);
+//			poc = null;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -101,8 +117,13 @@ public class HomePageFragment extends Fragment {
 //	 if (bundle != null) {
 //	 photo = (Bitmap) bundle.get("data");
 	 if(photo!=null){
-		 SavePicInLocal(photo);// 保存到本地
-	
+		 PictureOperatingCtrl poc = new PictureOperatingCtrl();
+		 if(pickPictureflag == 0){
+			 fileName = poc.SavePicInLocal(photo);// 保存到本地
+				Toast.makeText(HomePageFragment.this.getActivity(), fileName,
+				Toast.LENGTH_LONG).show();	 
+		 }
+		 
 	 // 生成一个Intent对象
 		 Intent intent = new Intent();
 		 intent.putExtra("picpath", fileName);
@@ -126,68 +147,8 @@ public class HomePageFragment extends Fragment {
 	 }
 	 }
 
-	// 保存拍摄的照片到手机的sd卡
-	private void SavePicInLocal(Bitmap bitmap) {
-		FileOutputStream fos = null;
-		BufferedOutputStream bos = null;
-		ByteArrayOutputStream baos = null; // 字节数组输出流
-		try {
-			baos = new ByteArrayOutputStream();
-			// bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			byte[] byteArray = baos.toByteArray();// 字节数组输出流转换成字节数组
-			String saveDir = Environment.getExternalStorageDirectory()
-					+ "/ClotheMe";
-			File dir = new File(saveDir);
-			if (!dir.exists()) {
-				dir.mkdir(); // 创建文件夹
-			}
-			fileName = saveDir + "/" + System.currentTimeMillis() + ".jpg";// ".PNG";
-			File file = new File(fileName);
-			file.delete();
-			if (!file.exists()) {
-				file.createNewFile();// 创建文件
-				Log.e("PicDir", file.getPath());
-				Toast.makeText(HomePageFragment.this.getActivity(), fileName,
-						Toast.LENGTH_LONG).show();
-			}
-			// 将字节数组写入到刚创建的图片文件中
-			fos = new FileOutputStream(file);
-			bos = new BufferedOutputStream(fos);
-			bos.write(byteArray);
 
-			// Bitmap miniThumb = PictureOperatingCtrl.extractMiniThumb(file,
-			// width, height);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			if (baos != null) {
-				try {
-					baos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			if (bos != null) {
-				try {
-					bos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			if (fos != null) {
-				try {
-					fos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-
-	}
+	
 
 	private String getPictureFilepath() {
 		return String.format(picturepath, HomePageFragment.this.getActivity()
