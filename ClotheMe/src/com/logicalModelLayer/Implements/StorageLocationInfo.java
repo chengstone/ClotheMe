@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.common.clothe.CommonDefine;
 import com.common.clothe.Log;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.Season;
 import com.daogen.clotheme.SeasonDao;
 import com.daogen.clotheme.StorageLocation;
@@ -133,6 +135,31 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 		Log.w("m_StorageLocationData does not contains " + in_StorageLocation);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 
+     * @brief  返回所有的存放位置
+     * @param  无
+     * @return 成功 所有的存放位置字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllLocation(){
+		if (m_StorageLocationData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_StorageLocationData.isEmpty() == true) {
+			Log.w("m_StorageLocationData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (StorageLocation value : m_StorageLocationData.values()) {
+			als.add(value.getLocation());
+		}
+
+		return als;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_StorageLocationID 指定key

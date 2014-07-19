@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.common.clothe.CommonDefine;
 import com.common.clothe.Log;
 import com.daogen.clotheme.Category;
 import com.daogen.clotheme.CategoryDao;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.CategoryDao.Properties;
 import com.logicalModelLayer.Interface.CategoryInfoInterface;
 
@@ -142,6 +144,30 @@ public class CategoryInfo implements CategoryInfoInterface {
     	Log.w("m_CategoryData does not contains " + in_CategoryName);
     	return CommonDefine.SYSTEM_ERROR;
     	
+	}
+	
+	/* 
+     * @brief  返回所有的分类
+     * @param  无
+     * @return 成功 所有分类字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllCategory(){
+		if (m_CategoryData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_CategoryData.isEmpty() == true) {
+			Log.w("m_CategoryData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (Category value : m_CategoryData.values()) {
+			als.add(value.getName());
+		}
+
+		return als;
 	}
 	
 	/* 增，改

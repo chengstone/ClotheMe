@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.common.clothe.CommonDefine;
 import com.common.clothe.Log;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.Season;
 import com.daogen.clotheme.StorageLocation;
 import com.daogen.clotheme.StorageLocationDao;
@@ -132,6 +134,31 @@ public class StyleInfo implements StyleInfoInterface {
 		Log.w("m_StyleData does not contains " + in_Style);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 
+     * @brief  返回所有的风格
+     * @param  无
+     * @return 成功 所有的风格字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllStyle(){
+		if (m_StyleData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_StyleData.isEmpty() == true) {
+			Log.w("m_StyleData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (Style value : m_StyleData.values()) {
+			als.add(value.getStyle());
+		}
+
+		return als;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_StyleID 指定key

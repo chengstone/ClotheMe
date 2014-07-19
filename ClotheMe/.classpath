@@ -10,5 +10,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="lib" path="logback/logback-android-1.1.1-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="logback/slf4j-api-1.7.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/afinal_0.5_bin.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

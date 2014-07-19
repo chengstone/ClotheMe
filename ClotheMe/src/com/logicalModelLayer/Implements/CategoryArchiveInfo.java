@@ -1,6 +1,7 @@
 package com.logicalModelLayer.Implements;
 
 import java.lang.annotation.Inherited;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import android.util.SparseArray;
 import com.common.clothe.*;
 import com.daogen.clotheme.CategoryArchive;
 import com.daogen.clotheme.CategoryArchiveDao;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.CategoryArchiveDao.Properties;
 import com.logicalModelLayer.Interface.CategoryArchiveInfoInterface;
 
@@ -127,6 +129,31 @@ public class CategoryArchiveInfo implements CategoryArchiveInfoInterface{
     	}
     	return CommonDefine.NO_ERROR;
     }
+    
+    /* 
+     * @brief  返回所有的提醒频率
+     * @param  无
+     * @return 成功 所有的提醒频率字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllRemindFrequency(){
+		if (m_CategoryArchiveData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_CategoryArchiveData.isEmpty() == true) {
+			Log.w("m_CategoryArchiveData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (CategoryArchive value : m_CategoryArchiveData.values()) {
+			als.add(value.getRemindFrequency());
+		}
+
+		return als;
+	}
+	
     /* 增，改
      * @brief  设置分类存档表map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_meterialID 指定key

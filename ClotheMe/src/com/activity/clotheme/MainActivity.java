@@ -13,6 +13,14 @@ import com.daogen.clotheme.DaoMaster.DevOpenHelper;
 import com.daogen.clotheme.DaoSession;
 import com.example.clotheme.R;
 import com.logicalModelLayer.Implements.CategoryArchiveInfo;
+import com.logicalModelLayer.Implements.CategoryInfo;
+import com.logicalModelLayer.Implements.MeterialInfo;
+import com.logicalModelLayer.Implements.PersonInfo;
+import com.logicalModelLayer.Implements.SeasonInfo;
+import com.logicalModelLayer.Implements.StorageLocationInfo;
+import com.logicalModelLayer.Implements.StyleInfo;
+import com.logicalModelLayer.Implements.ThicknessInfo;
+import com.logicalModelLayer.Implements.WearPlaceInfo;
 
 
 import java.util.ArrayList;  
@@ -86,9 +94,20 @@ public class MainActivity extends FragmentActivity implements TabListener,OnPage
         //默认显示第二项  
         mViewPager.setCurrentItem(0);  
           
+        LoadDB();
     }  
       
-  
+    private void LoadDB(){
+    	CategoryArchiveInfo.getInstance(this);
+    	CategoryInfo.getInstance(this);
+    	MeterialInfo.getInstance(this);
+    	PersonInfo.getInstance(this);
+    	SeasonInfo.getInstance(this);
+    	StorageLocationInfo.getInstance(this);
+    	StyleInfo.getInstance(this);
+    	ThicknessInfo.getInstance(this);
+    	WearPlaceInfo.getInstance(this);
+    }
   
     @Override  
     public void onTabReselected(Tab mTab, FragmentTransaction arg1)   

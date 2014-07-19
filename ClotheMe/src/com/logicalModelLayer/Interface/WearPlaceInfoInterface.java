@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.WearPlace;
 
 public interface WearPlaceInfoInterface {
@@ -11,4 +13,5 @@ public interface WearPlaceInfoInterface {
 	public int setWearPlace(String in_WearPlace);
 	public int removeWearPlace(long in_WearPlaceID);
 	public int removeWearPlace(String in_WearPlace);
+	public ArrayList<String> getAllWearPlace();
 }

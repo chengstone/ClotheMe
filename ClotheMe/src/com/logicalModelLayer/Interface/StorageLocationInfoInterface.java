@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.StorageLocation;
 
 public interface StorageLocationInfoInterface {
@@ -13,4 +15,5 @@ public interface StorageLocationInfoInterface {
 	public int setStorageLocation(StorageLocation in_StorageLocation);
 	public int removeStorageLocation(long in_StorageLocationID);
 	public int removeStorageLocation(String in_StorageLocation);
+	public ArrayList<String> getAllLocation();
 }

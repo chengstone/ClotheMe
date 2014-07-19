@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.Season;
 
 public interface SeasonInfoInterface {
@@ -10,4 +12,5 @@ public interface SeasonInfoInterface {
 	public int setSeason(Season in_Season);
 	public int removeSeason(long in_SeasonID);
 	public int removeSeason(String in_SeasonName);
+	public ArrayList<String> getAllSeason();
 }

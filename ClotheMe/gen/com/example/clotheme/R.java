@@ -1279,7 +1279,6 @@ containing a value of this type.
         public static final int wrong=0x7f020094;
     }
     public static final class id {
-        public static final int TextView06=0x7f06006c;
         public static final int a_item=0x7f060081;
         public static final int action_bar=0x7f06002d;
         public static final int action_bar_activity_content=0x7f060026;
@@ -1306,7 +1305,7 @@ containing a value of this type.
         public static final int btn_take_photo=0x7f060076;
         public static final int button1=0x7f060060;
         public static final int c_item=0x7f060083;
-        public static final int cancel_button=0x7f060069;
+        public static final int cancel_button=0x7f06006d;
         public static final int center=0x7f06000c;
         public static final int center_horizontal=0x7f06000a;
         public static final int center_vertical=0x7f060008;
@@ -1357,15 +1356,15 @@ containing a value of this type.
         public static final int never=0x7f06001b;
         public static final int none=0x7f060022;
         public static final int normal=0x7f060012;
-        public static final int ok_button=0x7f06006a;
+        public static final int ok_button=0x7f06006e;
         public static final int preview=0x7f06004d;
         public static final int progressBar1=0x7f060073;
         public static final int progress_circular=0x7f060029;
         public static final int progress_horizontal=0x7f06002a;
-        public static final int put_position=0x7f060064;
+        public static final int put_position=0x7f060065;
         public static final int radio=0x7f060040;
-        public static final int remind_frequency=0x7f06006e;
-        public static final int remind_time=0x7f06006d;
+        public static final int remind_frequency=0x7f06006c;
+        public static final int remind_time=0x7f06006b;
         public static final int right=0x7f060007;
         public static final int search_badge=0x7f060043;
         public static final int search_bar=0x7f060042;
@@ -1381,10 +1380,10 @@ containing a value of this type.
         public static final int seekbar=0x7f06005c;
         public static final int seekbar_zoom=0x7f06005d;
         public static final int selectImage=0x7f060070;
-        public static final int select_category=0x7f060063;
-        public static final int select_season=0x7f060066;
-        public static final int select_styles=0x7f060068;
-        public static final int select_thickness=0x7f060067;
+        public static final int select_category=0x7f060064;
+        public static final int select_season=0x7f060067;
+        public static final int select_styles=0x7f060069;
+        public static final int select_thickness=0x7f060068;
         public static final int settings=0x7f060052;
         public static final int share=0x7f06005b;
         public static final int shortcut=0x7f06003f;
@@ -1412,8 +1411,9 @@ containing a value of this type.
         public static final int uploadImageResult=0x7f060071;
         public static final int useLogo=0x7f060015;
         public static final int vertical=0x7f060001;
-        public static final int wash_remind=0x7f06006b;
-        public static final int whose_clothes=0x7f060065;
+        public static final int wash_remind=0x7f06006a;
+        public static final int wear_place=0x7f060066;
+        public static final int whose_clothes=0x7f060063;
         public static final int withText=0x7f06001e;
         public static final int zoom=0x7f060050;
         public static final int zoom_seekbar=0x7f060051;

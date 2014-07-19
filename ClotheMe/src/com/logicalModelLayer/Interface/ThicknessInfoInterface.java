@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.Thickness;
 
 public interface ThicknessInfoInterface {
@@ -9,4 +11,5 @@ public interface ThicknessInfoInterface {
 	public int setThickness(long in_ThicknessID,Thickness in_Thickness);
 	public int setThickness(Thickness in_Thickness);
 	public int removeThickness(long in_ThicknessID);
+	public ArrayList<String> getAllThickness();
 }

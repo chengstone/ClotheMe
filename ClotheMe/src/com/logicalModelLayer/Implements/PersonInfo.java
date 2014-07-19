@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.daogen.clotheme.Meterial;
 import com.daogen.clotheme.MeterialDao;
 import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.PersonInformationDao;
+import com.functionCtrl.clotheme.CommonFunctionCtrl;
 import com.logicalModelLayer.Interface.PersonInfoInterface;
 
 public class PersonInfo implements PersonInfoInterface {
@@ -131,6 +133,31 @@ public class PersonInfo implements PersonInfoInterface {
 		Log.w("m_PersonInformationData does not contains " + in_PersonName);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 
+     * @brief  返回所有的用户名字
+     * @param  无
+     * @return 成功 所有的名字字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllPersonName(){
+		if (m_PersonInformationData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_PersonInformationData.isEmpty() == true) {
+			Log.w("m_PersonInformationData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (PersonInformation value : m_PersonInformationData.values()) {
+			als.add(value.getPersonName());
+		}
+
+		return als;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_PersonID 指定key

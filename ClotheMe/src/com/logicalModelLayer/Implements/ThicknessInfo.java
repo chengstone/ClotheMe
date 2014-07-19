@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.common.clothe.CommonDefine;
 import com.common.clothe.Log;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.Style;
 import com.daogen.clotheme.StyleDao;
 import com.daogen.clotheme.Thickness;
@@ -133,6 +135,30 @@ public class ThicknessInfo implements ThicknessInfoInterface {
 		return CommonDefine.SYSTEM_ERROR;
 	}
     
+	/* 
+     * @brief  返回所有的厚度
+     * @param  无
+     * @return 成功 所有的厚度字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllThickness(){
+		if (m_ThicknessData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_ThicknessData.isEmpty() == true) {
+			Log.w("m_ThicknessData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (Thickness value : m_ThicknessData.values()) {
+			als.add(value.getThickness());
+		}
+
+		return als;
+	}
+	
     /* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_ThicknessID 指定key

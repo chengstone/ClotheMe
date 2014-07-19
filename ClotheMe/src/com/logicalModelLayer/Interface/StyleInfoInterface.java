@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.Style;
 
 public interface StyleInfoInterface {
@@ -11,4 +13,5 @@ public interface StyleInfoInterface {
 	public int setStyle(String in_Style);
 	public int removeStyle(long in_StyleID);
 	public int removeStyle(String in_Style);
+	public ArrayList<String> getAllStyle();
 }

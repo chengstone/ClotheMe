@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,6 +132,31 @@ public class SeasonInfo implements SeasonInfoInterface {
 		Log.w("m_SeasonData does not contains " + in_SeasonName);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 
+     * @brief  返回所有的季节
+     * @param  无
+     * @return 成功 所有的季节字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllSeason(){
+		if (m_SeasonData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_SeasonData.isEmpty() == true) {
+			Log.w("m_SeasonData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (Season value : m_SeasonData.values()) {
+			als.add(value.getSeason());
+		}
+
+		return als;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_SeasonID 指定key

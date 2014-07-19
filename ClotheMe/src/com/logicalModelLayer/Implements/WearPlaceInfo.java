@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.common.clothe.CommonDefine;
 import com.common.clothe.Log;
+import com.daogen.clotheme.PersonInformation;
 import com.daogen.clotheme.Style;
 import com.daogen.clotheme.Thickness;
 import com.daogen.clotheme.ThicknessDao;
@@ -132,6 +134,31 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 		Log.w("m_WearPlaceData does not contains " + in_WearPlace);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 
+     * @brief  返回所有的穿衣场合
+     * @param  无
+     * @return 成功 所有的穿衣场合字符串数组 失败 null
+     * */
+	public ArrayList<String> getAllWearPlace(){
+		if (m_WearPlaceData == null) {
+			Log.w("DataSource is null, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_WearPlaceData.isEmpty() == true) {
+			Log.w("m_WearPlaceData is Empty");
+			return null;
+		}
+
+//		ArrayList al=new ArrayList(); 
+		ArrayList<String> als = new ArrayList<String>(0);
+		for (WearPlace value : m_WearPlaceData.values()) {
+			als.add(value.getWearPlace());
+		}
+
+		return als;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_WearPlaceID 指定key

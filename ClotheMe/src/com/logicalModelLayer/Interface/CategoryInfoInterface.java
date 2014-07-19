@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.Category;
 
 public interface CategoryInfoInterface {
@@ -10,4 +12,5 @@ public interface CategoryInfoInterface {
 	public int setCategory(Category in_Category);
 	public int removeCategory(long in_CategoryID);
 	public int removeCategory(String in_CategoryName);
+	public ArrayList<String> getAllCategory();
 }

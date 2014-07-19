@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.ArrayList;
+
 import com.daogen.clotheme.PersonInformation;
 
 public interface PersonInfoInterface {
@@ -10,4 +12,5 @@ public interface PersonInfoInterface {
 	public int setPerson(PersonInformation in_PersonInformation);
 	public int removePerson(long in_PersonID);
 	public int removePerson(String in_PersonName);
+	public ArrayList<String> getAllPersonName();
 }
