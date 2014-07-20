@@ -33,6 +33,33 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/meterial_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:padding="8dp"
+                    android:text="物品描述"
+                    android:textColor="#333"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/desc_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="false"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/meterial_desc"
+                    android:ems="10" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +104,6 @@
                     android:gravity="center_vertical" >
 
                     <TextView
-                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -98,7 +124,6 @@
                         android:text="."
                         android:textColor="#000"
                         android:textSize="15sp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -129,7 +154,6 @@
                         android:text="."
                         android:textColor="#000"
                         android:textSize="15sp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -190,7 +214,6 @@
                         android:text="."
                         android:textColor="#000"
                         android:textSize="15sp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -226,7 +249,7 @@
                 <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/preference_last_item"
+                    android:background="@drawable/preference_item"
                     android:clickable="true"
                     android:gravity="center_vertical" >
 
@@ -249,9 +272,63 @@
                         android:text="."
                         android:textColor="#000"
                         android:textSize="15sp" />
-
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/preference_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="上次清洗日期"
+                        android:textColor="#333"
+                        android:textSize="17sp" />
+
+                    <Spinner
+                        android:id="@+id/wash_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentRight="true"
+                        android:padding="8dp"
+                        android:text="."
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/preference_last_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="上次穿衣日期"
+                        android:textColor="#333"
+                        android:textSize="17sp" />
+
+                    <Spinner
+                        android:id="@+id/wear_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentRight="true"
+                        android:padding="8dp"
+                        android:text="."
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -368,9 +445,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="14dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="14dp"
                     android:background="@drawable/btn_style_green"
                     android:onClick="btn_back_send"
+                    android:padding="8dp"
                     android:text="取消"
                     android:textColor="#fff"
                     android:textSize="18sp" />
@@ -382,36 +461,17 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="14dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="14dp"
                     android:background="@drawable/btn_style_green"
                     android:onClick="btn_back_send"
-                    android:text="确定"
+                    android:text="保存"
                     android:textColor="#fff"
                     android:textSize="18sp" />
+
             </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_centerVertical="true"
-            android:text="TextView" />
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/textView1"/>
-
-    </RelativeLayout>
 
 </LinearLayout>

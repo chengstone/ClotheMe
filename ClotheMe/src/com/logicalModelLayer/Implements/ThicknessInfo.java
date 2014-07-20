@@ -112,27 +112,27 @@ public class ThicknessInfo implements ThicknessInfoInterface {
      * @param  out_Thickness value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getThickness(String in_Thickness,Thickness out_Thickness){
+	public Thickness getThickness(String in_Thickness){//,Thickness out_Thickness){
 		if (m_ThicknessData == null 
 		|| in_Thickness == null
 		|| in_Thickness.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_ThicknessData.isEmpty() == true) {
 			Log.w("m_ThicknessData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (Thickness value : m_ThicknessData.values()) {
 			if (value.getThickness().equals(in_Thickness)) {
-				out_Thickness = value;
-				return CommonDefine.NO_ERROR;
+				//out_Thickness = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_ThicknessData does not contains " + in_Thickness);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
     
 	/* 
@@ -187,7 +187,7 @@ public class ThicknessInfo implements ThicknessInfoInterface {
 
 			if (m_ThicknessData.put(in_ThicknessID, in_Thickness) == null) {
 				Log.w("Thickness put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -218,9 +218,8 @@ public class ThicknessInfo implements ThicknessInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		Thickness out_Thickness = null;
-		if (getThickness(in_Thickness.getThickness(), out_Thickness) 
-				== CommonDefine.NO_ERROR) {
+		Thickness out_Thickness = getThickness(in_Thickness.getThickness()) ;
+		if (out_Thickness != null) {
 			Log.w("Thickness " + in_Thickness.getThickness()
 					+ " is already exsists");
 
@@ -233,7 +232,7 @@ public class ThicknessInfo implements ThicknessInfoInterface {
 			}
 			if (m_ThicknessData.put(in_Thickness.getId(), in_Thickness) == null) {
 				Log.w("Thickness put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -242,13 +241,13 @@ public class ThicknessInfo implements ThicknessInfoInterface {
 
 		if (m_ThicknessData.put(in_Thickness.getId(), in_Thickness) == null) {
 			Log.w("Thickness put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_ThicknessDao.insert(in_Thickness);
 		if (retDao != 0) {
 			Log.e("m_ThicknessDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

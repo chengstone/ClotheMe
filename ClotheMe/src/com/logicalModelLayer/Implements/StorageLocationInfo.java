@@ -112,28 +112,28 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
      * @param  out_StorageLocation value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getStorageLocation(String in_StorageLocation,
-			StorageLocation out_StorageLocation) {
+	public StorageLocation getStorageLocation(String in_StorageLocation){
+			//StorageLocation out_StorageLocation) {
 		if (m_StorageLocationData == null 
 		|| in_StorageLocation == null
 		|| in_StorageLocation.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_StorageLocationData.isEmpty() == true) {
 			Log.w("m_StorageLocationData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (StorageLocation value : m_StorageLocationData.values()) {
 			if (value.getLocation().equals(in_StorageLocation)) {
-				out_StorageLocation = value;
-				return CommonDefine.NO_ERROR;
+				//out_StorageLocation = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_StorageLocationData does not contains " + in_StorageLocation);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
 	
 	/* 
@@ -191,7 +191,7 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 
 			if (m_StorageLocationData.put(in_StorageLocationID, in_StorageLocation) == null) {
 				Log.w("StorageLocation put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -200,13 +200,13 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 
 		if (m_StorageLocationData.put(in_StorageLocationID, in_StorageLocation) == null) {
 			Log.w("Season put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_StorageLocationDao.insert(in_StorageLocation);
 		if (retDao != 0) {
 			Log.e("m_StorageLocationDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -222,9 +222,8 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		StorageLocation out_StorageLocation = null;
-		if (getStorageLocation(in_StorageLocation.getLocation(), out_StorageLocation) 
-				== CommonDefine.NO_ERROR) {
+		StorageLocation out_StorageLocation = getStorageLocation(in_StorageLocation.getLocation());
+		if ( out_StorageLocation != null) {
 			Log.w("StorageLocation " + in_StorageLocation.getLocation()
 					+ " is already exsists");
 
@@ -237,7 +236,7 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 			}
 			if (m_StorageLocationData.put(in_StorageLocation.getId(), in_StorageLocation) == null) {
 				Log.w("StorageLocation put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -246,13 +245,13 @@ public class StorageLocationInfo implements StorageLocationInfoInterface {
 
 		if (m_StorageLocationData.put(in_StorageLocation.getId(), in_StorageLocation) == null) {
 			Log.w("StorageLocation put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_StorageLocationDao.insert(in_StorageLocation);
 		if (retDao != 0) {
 			Log.e("m_StorageLocationDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

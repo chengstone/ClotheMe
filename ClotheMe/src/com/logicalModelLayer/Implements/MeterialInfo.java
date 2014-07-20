@@ -55,6 +55,16 @@ public class MeterialInfo implements MeterialInfoInterface{
         return m_instance;
     }  
     
+    /** 
+     * @brief  取得MeterialDao 
+     *  
+     * @param  
+     * @return MeterialDao
+     */ 
+//    public MeterialDao getMeterialDao(){
+//    	return m_MeterialDao;  
+//    }
+    
     /*
      * @brief  加载数据库物品表
      * @return 成功 NO_ERROR 失败 无
@@ -162,7 +172,7 @@ public class MeterialInfo implements MeterialInfoInterface{
 
 			if (m_MeterialData.put(in_MeterialID, in_Meterial) == null) {
 				Log.w("Meterial put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -171,13 +181,13 @@ public class MeterialInfo implements MeterialInfoInterface{
 
 		if (m_MeterialData.put(in_MeterialID, in_Meterial) == null) {
 			Log.w("Meterial put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_MeterialDao.insert(in_Meterial);
 		if (retDao != 0) {
 			Log.e("m_MeterialDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -211,7 +221,7 @@ public class MeterialInfo implements MeterialInfoInterface{
 			}
 			if (m_MeterialData.put(in_Meterial.getId(), in_Meterial) == null) {
 				Log.w("Meterial put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -220,13 +230,13 @@ public class MeterialInfo implements MeterialInfoInterface{
 
 		if (m_MeterialData.put(in_Meterial.getId(), in_Meterial) == null) {
 			Log.w("Meterial put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_MeterialDao.insert(in_Meterial);
 		if (retDao != 0) {
 			Log.e("m_MeterialDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

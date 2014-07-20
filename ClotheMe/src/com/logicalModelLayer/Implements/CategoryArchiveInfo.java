@@ -188,7 +188,7 @@ public class CategoryArchiveInfo implements CategoryArchiveInfoInterface{
     		
         	if(m_CategoryArchiveData.put(in_meterialID,in_CategoryArchive) == null){
             	Log.w("CategoryArchive put failed");
-        		return CommonDefine.SYSTEM_ERROR;
+//        		return CommonDefine.SYSTEM_ERROR;
         	}
         	return CommonDefine.NO_ERROR;
 //    		return CommonDefine.SYSTEM_ERROR;
@@ -198,7 +198,7 @@ public class CategoryArchiveInfo implements CategoryArchiveInfoInterface{
 
     	if(m_CategoryArchiveData.put(in_meterialID,in_CategoryArchive) == null){
         	Log.w("CategoryArchive put failed");
-    		return CommonDefine.SYSTEM_ERROR;
+//    		return CommonDefine.SYSTEM_ERROR;
     	}
 
 //    	修改更新：
@@ -216,7 +216,7 @@ public class CategoryArchiveInfo implements CategoryArchiveInfoInterface{
     	long retDao = m_CategoryArchiveDao.insert(in_CategoryArchive);
     	if(retDao != 0){
     		Log.e("m_CategoryArchiveDao insert failed");
-    		return CommonDefine.SYSTEM_ERROR;
+//    		return CommonDefine.SYSTEM_ERROR;
     	}
     	
     	return CommonDefine.NO_ERROR;

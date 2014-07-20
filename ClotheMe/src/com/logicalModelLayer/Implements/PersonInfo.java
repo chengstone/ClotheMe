@@ -111,27 +111,27 @@ public class PersonInfo implements PersonInfoInterface {
      * @param  out_PersonInformation value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getPerson(String in_PersonName,PersonInformation out_PersonInformation){
+	public PersonInformation getPerson(String in_PersonName){//,PersonInformation out_PersonInformation){
 		if (m_PersonInformationData == null 
 		|| in_PersonName == null
 		|| in_PersonName.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_PersonInformationData.isEmpty() == true) {
 			Log.w("m_PersonInformationData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (PersonInformation value : m_PersonInformationData.values()) {
 			if (value.getPersonName().equals(in_PersonName)) {
-				out_PersonInformation = value;
-				return CommonDefine.NO_ERROR;
+				//out_PersonInformation = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_PersonInformationData does not contains " + in_PersonName);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
 	
 	/* 
@@ -188,7 +188,7 @@ public class PersonInfo implements PersonInfoInterface {
 
 			if (m_PersonInformationData.put(in_PersonID, in_PersonInformation) == null) {
 				Log.w("PersonInformation put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -197,13 +197,13 @@ public class PersonInfo implements PersonInfoInterface {
 
 		if (m_PersonInformationData.put(in_PersonID, in_PersonInformation) == null) {
 			Log.w("PersonInformation put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_PersonInformationDao.insert(in_PersonInformation);
 		if (retDao != 0) {
 			Log.e("m_PersonInformationDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -219,9 +219,8 @@ public class PersonInfo implements PersonInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		PersonInformation out_PersonInformation = null;
-		if (getPerson(in_PersonInformation.getPersonName(), out_PersonInformation) 
-				== CommonDefine.NO_ERROR) {
+		PersonInformation out_PersonInformation = getPerson(in_PersonInformation.getPersonName()) ;
+		if (out_PersonInformation != null) {
 			Log.w("PersonName " + in_PersonInformation.getPersonName()
 					+ " is already exsists");
 
@@ -234,7 +233,7 @@ public class PersonInfo implements PersonInfoInterface {
 			}
 			if (m_PersonInformationData.put(in_PersonInformation.getId(), in_PersonInformation) == null) {
 				Log.w("PersonInformation put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -243,13 +242,13 @@ public class PersonInfo implements PersonInfoInterface {
 
 		if (m_PersonInformationData.put(in_PersonInformation.getId(), in_PersonInformation) == null) {
 			Log.w("PersonInformation put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_PersonInformationDao.insert(in_PersonInformation);
 		if (retDao != 0) {
 			Log.e("m_PersonInformationDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

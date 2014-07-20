@@ -110,27 +110,27 @@ public class SeasonInfo implements SeasonInfoInterface {
      * @param  out_Season value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getSeason(String in_SeasonName,Season out_Season){
+	public Season getSeason(String in_SeasonName){//, out_Season){
 		if (m_SeasonData == null 
 		|| in_SeasonName == null
 		|| in_SeasonName.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_SeasonData.isEmpty() == true) {
 			Log.w("m_SeasonData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (Season value : m_SeasonData.values()) {
 			if (value.getSeason().equals(in_SeasonName)) {
-				out_Season = value;
-				return CommonDefine.NO_ERROR;
+				//out_Season = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_SeasonData does not contains " + in_SeasonName);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
 	
 	/* 
@@ -187,7 +187,7 @@ public class SeasonInfo implements SeasonInfoInterface {
 
 			if (m_SeasonData.put(in_SeasonID, in_Season) == null) {
 				Log.w("Season put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -196,13 +196,13 @@ public class SeasonInfo implements SeasonInfoInterface {
 
 		if (m_SeasonData.put(in_SeasonID, in_Season) == null) {
 			Log.w("Season put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_SeasonDao.insert(in_Season);
 		if (retDao != 0) {
 			Log.e("m_SeasonDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -218,9 +218,8 @@ public class SeasonInfo implements SeasonInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		Season out_Season = null;
-		if (getSeason(in_Season.getSeason(), out_Season) 
-				== CommonDefine.NO_ERROR) {
+		Season out_Season = getSeason(in_Season.getSeason()) ;
+		if (out_Season != null) {
 			Log.w("Season " + in_Season.getSeason()
 					+ " is already exsists");
 
@@ -233,7 +232,7 @@ public class SeasonInfo implements SeasonInfoInterface {
 			}
 			if (m_SeasonData.put(in_Season.getId(), in_Season) == null) {
 				Log.w("Season put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -242,13 +241,13 @@ public class SeasonInfo implements SeasonInfoInterface {
 
 		if (m_SeasonData.put(in_Season.getId(), in_Season) == null) {
 			Log.w("Season put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_SeasonDao.insert(in_Season);
 		if (retDao != 0) {
 			Log.e("m_SeasonDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

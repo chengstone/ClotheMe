@@ -117,32 +117,32 @@ public class CategoryInfo implements CategoryInfoInterface {
      * @param  out_Category value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getCategory(String in_CategoryName,Category out_Category){
+	public Category getCategory(String in_CategoryName){//,Category out_Category){
 		if(m_CategoryData == null
 //    	|| out_Category == null
     	|| in_CategoryName == null
     	|| in_CategoryName.length() == 0){
         	Log.w("Param invalid, return SYSTEM_ERROR");
-    		return CommonDefine.SYSTEM_ERROR;
+    		return null;//CommonDefine.SYSTEM_ERROR;
     	}
     	if(m_CategoryData.isEmpty() == true){
     		Log.w("m_CategoryData is Empty");
-    		return CommonDefine.SYSTEM_ERROR;
+    		return null;//CommonDefine.SYSTEM_ERROR;
     	}
     	
     	for (Category value : m_CategoryData.values()) {
     		if(value.getName().equals(in_CategoryName)){
-    			out_Category = value;
+    			//out_Category = value;
 //        		if(out_Category == null){
 //                	Log.w("Category get failed");
 //    	      		return CommonDefine.SYSTEM_ERROR;
 //        		}
-        		return CommonDefine.NO_ERROR;
+        		return value;//CommonDefine.NO_ERROR;
     		}
     	}
         
     	Log.w("m_CategoryData does not contains " + in_CategoryName);
-    	return CommonDefine.SYSTEM_ERROR;
+    	return null;//CommonDefine.SYSTEM_ERROR;
     	
 	}
 	
@@ -201,7 +201,7 @@ public class CategoryInfo implements CategoryInfoInterface {
 
 	      	if(m_CategoryData.put(in_CategoryID,in_Category) == null){
 	           	Log.w("Category put failed");
-        		return CommonDefine.SYSTEM_ERROR;
+//        		return CommonDefine.SYSTEM_ERROR;
         	}
 	      	return CommonDefine.NO_ERROR;
 		}
@@ -210,13 +210,13 @@ public class CategoryInfo implements CategoryInfoInterface {
 
     	if(m_CategoryData.put(in_CategoryID,in_Category) == null){
 	       	Log.w("Category put failed");
-	   		return CommonDefine.SYSTEM_ERROR;
+//	   		return CommonDefine.SYSTEM_ERROR;
     	}
 
 	   	long retDao = m_CategoryDao.insert(in_Category);
     	if(retDao != 0){
     		Log.e("m_CategoryDao insert failed");
-	   		return CommonDefine.SYSTEM_ERROR;
+//	   		return CommonDefine.SYSTEM_ERROR;
 	   	}
 		    	
     	return CommonDefine.NO_ERROR;
@@ -234,8 +234,8 @@ public class CategoryInfo implements CategoryInfoInterface {
 		    return CommonDefine.SYSTEM_ERROR;
 		}
 
-		Category out_Category = null;
-		if(getCategory(in_Category.getName(),out_Category) == CommonDefine.NO_ERROR){
+		Category out_Category = getCategory(in_Category.getName());
+		if(out_Category != null){
 		    Log.w("CategoryName " + in_Category.getName() + " is already exsists");
 		    
 		    out_Category.setBelongCategoryID(in_Category.getBelongCategoryID());
@@ -249,7 +249,7 @@ public class CategoryInfo implements CategoryInfoInterface {
 		    }
 		    if(m_CategoryData.put(in_Category.getId(),in_Category) == null){
 	           	Log.w("Category put failed");
-        		return CommonDefine.SYSTEM_ERROR;
+//        		return CommonDefine.SYSTEM_ERROR;
         	}
 	      	return CommonDefine.NO_ERROR;
 		}
@@ -258,13 +258,13 @@ public class CategoryInfo implements CategoryInfoInterface {
 
     	if(m_CategoryData.put(in_Category.getId(),in_Category) == null){
 	       	Log.w("Category put failed");
-	   		return CommonDefine.SYSTEM_ERROR;
+//	   		return CommonDefine.SYSTEM_ERROR;
     	}
 
 	   	long retDao = m_CategoryDao.insert(in_Category);
     	if(retDao != 0){
     		Log.e("m_CategoryDao insert failed");
-	   		return CommonDefine.SYSTEM_ERROR;
+//	   		return CommonDefine.SYSTEM_ERROR;
 	   	}
 		    	
     	return CommonDefine.NO_ERROR;

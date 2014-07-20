@@ -10,9 +10,9 @@ public class WearPlaceSpinnerListener implements OnItemSelectedListener{
 //  @Override 
   public void onItemSelected(AdapterView<?> parent, View arg1, int pos, long arg3){ 
       // 在这里我们复习一下Toast的用法  
-      Toast.makeText(parent.getContext(), 
-                                "The planet is "+  parent.getItemAtPosition(pos).toString(), 
-                                 Toast.LENGTH_LONG).show(); 
+//      Toast.makeText(parent.getContext(), 
+//                                "The planet is "+  parent.getItemAtPosition(pos).toString(), 
+//                                 Toast.LENGTH_SHORT).show(); 
   }
 //  @Override 
   public void onNothingSelected(AdapterView<?> arg0) {  

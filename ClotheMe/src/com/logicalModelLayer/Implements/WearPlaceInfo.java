@@ -112,27 +112,27 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
      * @param  out_WearPlace value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getWearPlace(String in_WearPlace,WearPlace out_WearPlace){
+	public WearPlace getWearPlace(String in_WearPlace){//,WearPlace out_WearPlace){
 		if (m_WearPlaceData == null 
 		|| in_WearPlace == null 
 		|| in_WearPlace.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_WearPlaceData.isEmpty() == true) {
 			Log.w("m_WearPlaceData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (WearPlace value : m_WearPlaceData.values()) {
 			if (value.getWearPlace().equals(in_WearPlace)) {
-				out_WearPlace = value;
-				return CommonDefine.NO_ERROR;
+//				out_WearPlace = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_WearPlaceData does not contains " + in_WearPlace);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
 	
 	/* 
@@ -187,7 +187,7 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 
 			if (m_WearPlaceData.put(in_WearPlaceID, in_WearPlace) == null) {
 				Log.w("WearPlace put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -196,13 +196,13 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 
 		if (m_WearPlaceData.put(in_WearPlaceID, in_WearPlace) == null) {
 			Log.w("WearPlace put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_WearPlaceDao.insert(in_WearPlace);
 		if (retDao != 0) {
 			Log.e("m_WearPlaceDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -218,9 +218,8 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		WearPlace out_WearPlace = null;
-		if (getWearPlace(in_WearPlace.getWearPlace(), out_WearPlace) 
-				== CommonDefine.NO_ERROR) {
+		WearPlace out_WearPlace = getWearPlace(in_WearPlace.getWearPlace()) ;
+		if (out_WearPlace != null) {
 			Log.w("WearPlace " + in_WearPlace.getWearPlace()
 					+ " is already exsists");
 
@@ -233,7 +232,7 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 			}
 			if (m_WearPlaceData.put(in_WearPlace.getId(), in_WearPlace) == null) {
 				Log.w("WearPlace put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -242,13 +241,13 @@ public class WearPlaceInfo implements WearPlaceInfoInterface {
 
 		if (m_WearPlaceData.put(in_WearPlace.getId(), in_WearPlace) == null) {
 			Log.w("WearPlace put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_WearPlaceDao.insert(in_WearPlace);
 		if (retDao != 0) {
 			Log.e("m_WearPlaceDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

@@ -112,27 +112,27 @@ public class StyleInfo implements StyleInfoInterface {
      * @param  out_Style value将保存其中
      * @return 成功 NO_ERROR 失败 SYSTEM_ERROR
      * */
-	public int getStyle(String in_Style,Style out_Style){
+	public Style getStyle(String in_Style){//,Style out_Style){
 		if (m_StyleData == null 
 		|| in_Style == null
 		|| in_Style.length() == 0) {
 			Log.w("Param invalid, return SYSTEM_ERROR");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 		if (m_StyleData.isEmpty() == true) {
 			Log.w("m_StyleData is Empty");
-			return CommonDefine.SYSTEM_ERROR;
+			return null;//CommonDefine.SYSTEM_ERROR;
 		}
 
 		for (Style value : m_StyleData.values()) {
 			if (value.getStyle().equals(in_Style)) {
-				out_Style = value;
-				return CommonDefine.NO_ERROR;
+//				out_Style = value;
+				return value;//CommonDefine.NO_ERROR;
 			}
 		}
 
 		Log.w("m_StyleData does not contains " + in_Style);
-		return CommonDefine.SYSTEM_ERROR;
+		return null;//CommonDefine.SYSTEM_ERROR;
 	}
 	
 	/* 
@@ -187,7 +187,7 @@ public class StyleInfo implements StyleInfoInterface {
 
 			if (m_StyleData.put(in_StyleID, in_Style) == null) {
 				Log.w("Style put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -196,13 +196,13 @@ public class StyleInfo implements StyleInfoInterface {
 
 		if (m_StyleData.put(in_StyleID, in_Style) == null) {
 			Log.w("Style put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_StyleDao.insert(in_Style);
 		if (retDao != 0) {
 			Log.e("m_StyleDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;
@@ -218,9 +218,8 @@ public class StyleInfo implements StyleInfoInterface {
 			return CommonDefine.SYSTEM_ERROR;
 		}
 
-		Style out_Style = null;
-		if (getStyle(in_Style.getStyle(), out_Style) 
-				== CommonDefine.NO_ERROR) {
+		Style out_Style = getStyle(in_Style.getStyle()) ;
+		if (out_Style != null) {
 			Log.w("Style " + in_Style.getStyle()
 					+ " is already exsists");
 
@@ -233,7 +232,7 @@ public class StyleInfo implements StyleInfoInterface {
 			}
 			if (m_StyleData.put(in_Style.getId(), in_Style) == null) {
 				Log.w("Style put failed");
-				return CommonDefine.SYSTEM_ERROR;
+//				return CommonDefine.SYSTEM_ERROR;
 			}
 			return CommonDefine.NO_ERROR;
 		}
@@ -242,13 +241,13 @@ public class StyleInfo implements StyleInfoInterface {
 
 		if (m_StyleData.put(in_Style.getId(), in_Style) == null) {
 			Log.w("Style put failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		long retDao = m_StyleDao.insert(in_Style);
 		if (retDao != 0) {
 			Log.e("m_StyleDao insert failed");
-			return CommonDefine.SYSTEM_ERROR;
+//			return CommonDefine.SYSTEM_ERROR;
 		}
 
 		return CommonDefine.NO_ERROR;

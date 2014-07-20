@@ -8,8 +8,8 @@ public interface StorageLocationInfoInterface {
 	public int Load();
 	public int getStorageLocation(long in_StorageLocationID,
 								  StorageLocation out_StorageLocation);
-	public int getStorageLocation(String in_StorageLocation,
-			  StorageLocation out_StorageLocation);
+	public StorageLocation getStorageLocation(String in_StorageLocation);
+			  //StorageLocation out_StorageLocation);
 	public int setStorageLocation(long in_StorageLocationID,
 								  StorageLocation in_StorageLocation);
 	public int setStorageLocation(StorageLocation in_StorageLocation);

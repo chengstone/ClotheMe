@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import net.tsz.afinal.FinalBitmap;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,12 +36,23 @@ import com.activity.listener.SelectStyleSpinnerListener;
 import com.activity.listener.SelectThicknessSpinnerListener;
 import com.activity.listener.WearPlaceSpinnerListener;
 import com.activity.listener.WhoseClotheSpinnerListener;
+import com.common.clothe.CommonDefine;
+import com.daogen.clotheme.Category;
+import com.daogen.clotheme.Meterial;
+import com.daogen.clotheme.MeterialDao;
+import com.daogen.clotheme.PersonInformation;
+import com.daogen.clotheme.Season;
+import com.daogen.clotheme.StorageLocation;
+import com.daogen.clotheme.Style;
+import com.daogen.clotheme.Thickness;
+import com.daogen.clotheme.WearPlace;
 import com.example.clotheme.R;
 import com.functionCtrl.clotheme.BitmapUtil;
 import com.functionCtrl.clotheme.CommonFunctionCtrl;
 import com.functionCtrl.clotheme.PictureOperatingCtrl;
 import com.logicalModelLayer.Implements.CategoryArchiveInfo;
 import com.logicalModelLayer.Implements.CategoryInfo;
+import com.logicalModelLayer.Implements.MeterialInfo;
 import com.logicalModelLayer.Implements.PersonInfo;
 import com.logicalModelLayer.Implements.SeasonInfo;
 import com.logicalModelLayer.Implements.StorageLocationInfo;
@@ -82,6 +95,7 @@ public class ImagePreviewActivity extends Activity{
 	private Button ok_btn = null;
 	private Button cancel_btn = null;
 	
+	String picpath = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -89,7 +103,7 @@ public class ImagePreviewActivity extends Activity{
 		fb = FinalBitmap.create(this);
 		
 		m_ImageView = (ImageView)findViewById(R.id.add_picture);
-		String picpath = getIntent().getStringExtra("picpath");
+		picpath = getIntent().getStringExtra("picpath");
 //		Bitmap bmp = BitmapFactory.decodeFile(picpath); 
 		
 //		BitmapFactory.Options bfOptions=new BitmapFactory.Options();
@@ -190,6 +204,54 @@ public class ImagePreviewActivity extends Activity{
 		ok_btn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				EditText et = (EditText) findViewById(R.id.desc_text);
+				// Meterial
+				//MeterialDao meterialDao 
+				MeterialInfo meterialInfo = MeterialInfo.getInstance(
+						ImagePreviewActivity.this); // daoSession.getMeterialDao();
+				Meterial meterial = new Meterial();
+				meterial.setDescription(et.getText().toString());
+				meterial.setPicPath(picpath);
+				Category category = CategoryInfo.getInstance(ImagePreviewActivity.this)
+						.getCategory(
+								m_SelectCategorySpinner.getSelectedItem()
+										.toString());
+				meterial.setBelongCategoryID(Integer.valueOf(Long.toString(category.getId())));
+				StorageLocation storageLocation = StorageLocationInfo.getInstance(ImagePreviewActivity.this)
+						.getStorageLocation(m_PutPositionSpinner.getSelectedItem()
+								.toString());
+				meterial.setLocationID(Integer.valueOf(Long.toString(storageLocation.getId())));
+				PersonInformation personInformation = PersonInfo.getInstance(ImagePreviewActivity.this)
+						.getPerson(m_WhoseClotheSpinner.getSelectedItem()
+								.toString());
+				meterial.setPersonID(Integer.valueOf(Long.toString(personInformation.getId())));
+				Season season = SeasonInfo.getInstance(ImagePreviewActivity.this)
+						.getSeason(m_SelectSeasonSpinner.getSelectedItem()
+								.toString());
+				meterial.setSeasonID(Integer.valueOf(Long.toString(season.getId())));
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");    
+				String date=sdf.format(new java.util.Date());    
+				meterial.setLastWashDate(date);
+				Thickness thickness = ThicknessInfo.getInstance(ImagePreviewActivity.this)
+						.getThickness(m_SelectThicknessSpinner.getSelectedItem()
+								.toString());
+				meterial.setThicknessID(Integer.valueOf(Long.toString(thickness.getId())));
+//				meterial.setUseDate("2014/05/10");
+				WearPlace wearPlace = WearPlaceInfo.getInstance(ImagePreviewActivity.this)
+						.getWearPlace(m_WearPlaceSpinner.getSelectedItem()
+								.toString());
+				meterial.setWearPlaceID(wearPlace.getWearPlace());
+				Style style = StyleInfo.getInstance(ImagePreviewActivity.this)
+						.getStyle(m_SelectStyleSpinner.getSelectedItem()
+								.toString());
+				meterial.setStyleID(Integer.valueOf(Long.toString(style.getId())));
+//				meterialDao.insert(meterial);
+				int ret = meterialInfo.setMeterial(meterial);
+				if(ret == CommonDefine.NO_ERROR){
+					 Toast.makeText(ImagePreviewActivity.this, "保存衣物完成",
+					 Toast.LENGTH_LONG).show();
+				}
+				finish();
 //				String state = Environment.getExternalStorageState(); // 判断是否存在sd卡
 //				if (state.equals(Environment.MEDIA_MOUNTED)) {
 //					// Intent intent = new Intent();
