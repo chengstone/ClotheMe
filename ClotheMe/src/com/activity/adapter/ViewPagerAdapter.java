@@ -1,6 +1,7 @@
 package com.activity.adapter;
 
 
+import com.activity.fragments.CategoryListPageFragment;
 import com.activity.fragments.HomePageFragment;
 
 import android.support.v4.app.Fragment;  
@@ -29,7 +30,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
               mFragemnt=new HomePageFragment();  
               break;  
           case Fragment_Index_1:  
-              mFragemnt=new HomePageFragment();  
+              mFragemnt=new CategoryListPageFragment();  
               break;  
           case Fragment_Index_2:  
               mFragemnt=new HomePageFragment();  
