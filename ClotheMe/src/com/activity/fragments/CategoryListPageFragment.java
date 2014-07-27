@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.activity.clotheme.ImagePreviewActivity;
 import com.common.clothe.CommonDefine;
 import com.example.clotheme.R;
+import com.example.photowallfallsdemo.CategoryDetailWaterFallActivity;
+import com.example.photowallfallsdemo.PhotoWallFallsMainActivity;
 import com.functionCtrl.clotheme.CommonFunctionCtrl;
 import com.functionCtrl.clotheme.PictureOperatingCtrl;
+import com.huewu.pla.sample.MyPullToRefreshSampleActivity;
 import com.logicalModelLayer.Implements.CategoryInfo;
 import com.spring.sky.image.upload.SelectPicActivity;
 
@@ -68,5 +71,13 @@ private static final String TAG = "ListFragmentImpl";
         Toast.makeText(getActivity(), 
                 "You have selected " + categorys[position],
                 Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(CategoryListPageFragment.this
+//				.getActivity(), PhotoWallFallsMainActivity.class);
+        Intent intent = new Intent(CategoryListPageFragment.this
+				.getActivity(), CategoryDetailWaterFallActivity.class);
+        intent.putExtra("categoryname", categorys[position]);
+//        intent.setAction("android.intent.action.PHOTOWALLFALLS");
+        intent.setAction("android.intent.action.CATEGORYDETAILWATERFALL");
+		startActivity(intent);
     }    
 }

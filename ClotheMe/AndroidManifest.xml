@@ -21,6 +21,9 @@
 
     <supports-screens android:xlargeScreens="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:anyDensity="true"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -88,6 +91,33 @@
         </activity>
         
         <activity android:name="com.spring.sky.image.upload.SelectPicActivity" android:theme="@style/DialogStyleBottom"/>
+    
+        <activity android:name="com.huewu.pla.sample.MyPullToRefreshSampleActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.WATERFLOW" />
+
+                <category android:name="android.intent.category.WATERFLOW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.example.photowallfallsdemo.PhotoWallFallsMainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PHOTOWALLFALLS" />
+
+                <category android:name="android.intent.category.PHOTOWALLFALLS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.example.photowallfallsdemo.CategoryDetailWaterFallActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CATEGORYDETAILWATERFALL" />
+
+                <category android:name="android.intent.category.CATEGORYDETAILWATERFALL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
     
     <!-- 在SD卡中创建与删除文件权限 -->

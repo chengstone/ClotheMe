@@ -26,6 +26,10 @@ public class CommonDefine {
             public static final String DATABASENAME = "dat.db";
         } 
         
+        public  enum SeasonEnum {
+    		SPRING, SUMMER, AUTUMN, WINTER;
+        }
+        
     	public  enum TabState {
     		HOMEPAGE, CATEGORY, POSITION;
 

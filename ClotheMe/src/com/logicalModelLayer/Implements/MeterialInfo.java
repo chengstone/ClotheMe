@@ -1,5 +1,6 @@
 package com.logicalModelLayer.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,6 +142,42 @@ public class MeterialInfo implements MeterialInfoInterface{
 		Log.w("m_MeterialData does not contains " + in_Description);
 		return CommonDefine.SYSTEM_ERROR;
 	}
+	
+	/* 查
+     * @brief  根据分类ID查询所有的物品
+     * @param  in_CategoryID 分类ID
+     * @return 成功 所有的物品 失败 null
+     * */
+	public List<Meterial> getMeterialFromCategoryID(Long in_CategoryID){
+		if (m_MeterialData == null
+		|| in_CategoryID < 0) {
+			Log.w("Param invalid, return SYSTEM_ERROR");
+			return null;
+		}
+		if (m_MeterialData.isEmpty() == true) {
+			Log.w("m_MeterialData is Empty");
+			return null;
+		}
+
+		List<Meterial> result = new ArrayList<Meterial>() ;
+		for (Meterial value : m_MeterialData.values()) {
+			if (value.getBelongCategoryID().equals(Integer.parseInt(in_CategoryID.toString()))) {
+				result.add(value);
+//				return CommonDefine.NO_ERROR;
+			}
+		}
+
+//		Log.w("m_MeterialData does not contains " + in_Description);
+		if(result.size() == 0){
+			Log.w("m_MeterialData does not match " + in_CategoryID);
+			return null;
+		}
+		else {
+			return result;
+		}
+//		return CommonDefine.SYSTEM_ERROR;
+	}
+	
 	/* 增，改
      * @brief  设置map中指定key的value,如果该key已存在,则删除,添加新值
      * @param  in_MeterialID 指定key

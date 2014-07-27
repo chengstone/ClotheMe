@@ -1,5 +1,7 @@
 package com.logicalModelLayer.Interface;
 
+import java.util.List;
+
 import com.daogen.clotheme.Meterial;
 import com.daogen.clotheme.MeterialDao;
 
@@ -12,4 +14,5 @@ public interface MeterialInfoInterface {
 	public int removeMeterial(long in_MeterialID);
 	public int removeMeterial(String in_Description);
 //	public MeterialDao getMeterialDao();
+	public List<Meterial> getMeterialFromCategoryID(Long in_CategoryID);
 }
